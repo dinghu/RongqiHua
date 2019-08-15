@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.fkh.support.ui.widget.NoScrollViewPager
+        android:id="@+id/mViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line_color" />
+
+    <com.fkh.support.ui.widget.alphatab.AlphaTabsLayout
+        android:id="@+id/alphaIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <com.fkh.support.ui.widget.alphatab.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:tabIconNormal="@drawable/home_tab_qcargo_normal"
+            app:tabIconSelected="@drawable/home_tab_qcargo_selected"
+            app:tabText="行程"
+            app:tabTextSize="13sp"
+            app:textColorNormal="#999999"
+            app:textColorSelected="@color/colorTheme" />
+
+        <com.fkh.support.ui.widget.alphatab.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:tabIconNormal="@drawable/home_tab_found_normal"
+            app:tabIconSelected="@drawable/home_tab_found_selected"
+            app:tabText="运单"
+            app:tabTextSize="13sp"
+            app:textColorNormal="#999999"
+            app:textColorSelected="@color/colorTheme" />
+
+
+        <com.fkh.support.ui.widget.alphatab.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:tabIconNormal="@drawable/home_tab_my_info_normal"
+            app:tabIconSelected="@drawable/home_tab_my_info_selected"
+            app:tabText="我"
+            app:tabTextSize="13sp"
+            app:textColorNormal="#999999"
+            app:textColorSelected="@color/colorTheme" />
+    </com.fkh.support.ui.widget.alphatab.AlphaTabsLayout>
+</LinearLayout>

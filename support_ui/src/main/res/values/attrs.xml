@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="keyValueView">
+        <attr name="kvkeyColor" format="color" />
+        <attr name="kvrightImage" format="reference" />
+        <attr name="kvvalueColor" format="color" />
+        <attr name="kvvalueTextSize" format="dimension" />
+        <attr name="kvkeyTextSize" format="dimension" />
+        <attr name="kvitemPadding" format="dimension" />
+        <attr name="kvvalueGravity">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+        <attr name="kvvaluehintColor" format="color" />
+        <attr name="kvvaluehint" format="string" />
+        <attr name="kvtextPreImage" format="reference" />
+        <attr name="kvvalue" format="string" />
+        <attr name="kvkey" format="string" />
+        <attr name="kvkeyvalueSpace" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="KeyValueListView">
+        <attr name="kvlkeyColor" format="color" />
+        <attr name="kvlrightImage" format="reference" />
+        <attr name="kvlvalueColor" format="color" />
+        <attr name="kvlvalueTextSize" format="dimension" />
+        <attr name="kvlkeyTextSize" format="dimension" />
+        <attr name="kvlitemPadding" format="dimension" />
+        <attr name="kvlvalueGravity">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+        <attr name="kvldivider" format="color" />
+        <attr name="kvldividerHeight" format="dimension" />
+    </declare-styleable>
+
+
+    <declare-styleable name="FunctionView">
+        <attr name="ftvalue" format="string" />
+        <attr name="ftkey" format="string" />
+        <attr name="ftkeyColor" format="color" />
+        <attr name="ftPreImage" format="reference" />
+        <attr name="ftrightImage" format="reference" />
+        <attr name="ftvalueColor" format="color" />
+        <attr name="ftvalueTextSize" format="dimension" />
+        <attr name="ftkeyTextSize" format="dimension" />
+        <attr name="ftbadge" format="integer" />
+    </declare-styleable>
+
+    <!--LinePagerIndicator-->
+    <declare-styleable name="LinePagerIndicatorView">
+        <attr name="lpiindicatorColor" format="color" />
+        <attr name="lpiunderlineColor" format="color" />
+        <attr name="lpidividerColor" format="color" />
+        <attr name="lpiindicatorHeight" format="dimension" />
+        <attr name="lpiunderlineHeight" format="dimension" />
+        <attr name="lpidividerPadding" format="dimension" />
+        <attr name="lpitabPaddingLeftRight" format="dimension" />
+        <attr name="lpiscrollOffset" format="dimension" />
+        <attr name="lpitabBackgrounds" format="reference" />
+        <attr name="lpisameLine" format="boolean" />
+        <attr name="lpitabTextSize" format="dimension" />
+        <attr name="lpitextAllCaps" format="boolean" />
+        <attr name="lpitabTextColorSelected" format="color" />
+        <attr name="lpitabTextColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="TitleView">
+        <attr name="titleColor" format="color" />
+        <attr name="isLeftDisplay" format="boolean" />
+        <attr name="isCloseDisplay" format="boolean" />
+        <attr name="titleText" format="string" />
+        <attr name="rightText" format="string" />
+        <attr name="rightImg" format="reference" />
+        <attr name="leftImg" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="CheckView">
+        <attr name="imgNormal" format="reference" />
+        <attr name="imgCheck" format="reference" />
+        <attr name="checked" format="boolean" />
+    </declare-styleable>
+
+</resources>
