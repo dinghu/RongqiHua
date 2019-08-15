@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.fkh.support.ui.widget.TitleView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        app:titleText="信息注册" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:width="90dp"
+                android:gravity="center_vertical"
+                android:text="姓名"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_edit" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:width="90dp"
+                android:gravity="center_vertical"
+                android:text="性别"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="男" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="女" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:width="90dp"
+                android:gravity="center_vertical"
+                android:text="生日"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_edit" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:width="90dp"
+                android:gravity="center_vertical"
+                android:text="入职日期"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_edit" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:width="90dp"
+                android:gravity="center_vertical"
+                android:text="身份证号"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_edit" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:width="90dp"
+                android:gravity="center_vertical"
+                android:text="联系电话"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_edit" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:width="90dp"
+                android:gravity="center_vertical"
+                android:text="邮箱"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_edit" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:width="90dp"
+                android:gravity="center_vertical"
+                android:text="住址"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_edit" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:width="90dp"
+                android:gravity="center_vertical"
+                android:text="邀请码"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_edit" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/reserveBtn"
+            style="@style/ButtonStyle"
+            android:text="注册" />
+
+    </LinearLayout>
+
+</LinearLayout>
