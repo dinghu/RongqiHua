@@ -10,8 +10,7 @@ import com.rongqi.hua.rongqihua.R;
 import com.rongqi.hua.rongqihua.base.RqBaseActivity;
 import com.rongqi.hua.rongqihua.entity.req.AccountReq;
 import com.rongqi.hua.rongqihua.entity.resp.BaseResp;
-
-import java.util.HashMap;
+import com.rongqi.hua.rongqihua.uitls.ActivityUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -46,6 +45,7 @@ public class RegistActivity extends RqBaseActivity {
             public void onSuccess(BaseResp baseResp) {
                 hideLoading();
                 ToastUtils.showLong(baseResp.message);
+                ActivityUtils.returnToActivity(RegistActivity.this, LoginActivity.class);
             }
 
             @Override

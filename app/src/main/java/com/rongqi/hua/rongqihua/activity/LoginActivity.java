@@ -13,8 +13,6 @@ import com.rongqi.hua.rongqihua.base.RqBaseActivity;
 import com.rongqi.hua.rongqihua.entity.req.AccountReq;
 import com.rongqi.hua.rongqihua.entity.resp.BaseResp;
 
-import java.util.HashMap;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
