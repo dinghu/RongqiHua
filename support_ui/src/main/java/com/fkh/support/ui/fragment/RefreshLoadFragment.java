@@ -1,4 +1,4 @@
-package com.fkh.support.ui.activity;
+package com.fkh.support.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -30,13 +30,6 @@ public abstract class RefreshLoadFragment<T> extends Fragment {
 
     public abstract void getData(int page, boolean isRefreh);
 
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_refresh_load_common, null);
-        return view;
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

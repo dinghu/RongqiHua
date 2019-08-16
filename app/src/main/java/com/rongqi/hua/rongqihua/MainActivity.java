@@ -9,6 +9,7 @@ import com.fkh.support.ui.widget.NoScrollViewPager;
 import com.fkh.support.ui.widget.alphatab.AlphaTabsLayout;
 import com.rongqi.hua.rongqihua.fragment.HomeFragment;
 import com.rongqi.hua.rongqihua.fragment.MineFragment;
+import com.rongqi.hua.rongqihua.fragment.YejiFragment;
 
 import java.util.ArrayList;
 
@@ -33,7 +34,7 @@ public class MainActivity extends HomeActivity {
         mAlphaIndicator = MainActivity.this.alphaIndicator;
         mViewPager = viewPager;
         fragments.add(new HomeFragment());
-        fragments.add(new MineFragment());
+        fragments.add(new YejiFragment());
         fragments.add(new MineFragment());
         bindFragement(fragments);
     }

@@ -1,9 +1,15 @@
-package com.fkh.support.ui.activity;
+package com.fkh.support.ui.fragment;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 
+import com.fkh.support.ui.R;
 import com.fkh.support.ui.adapter.BaseListAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -13,6 +19,13 @@ public abstract class RefreshLoadListViewFragment<T,ViewHolder> extends RefreshL
     private AbsListView listView;
     private BaseListAdapter adapter;
     private int itemLayout;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_refresh_load_common, null);
+        return view;
+    }
 
     public void bindView(SmartRefreshLayout smartRefreshLayout, AbsListView listView, List<T> mData, int itemLayout) {
         super.bindView(smartRefreshLayout, mData);
