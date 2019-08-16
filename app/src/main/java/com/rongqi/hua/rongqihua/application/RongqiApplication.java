@@ -46,7 +46,6 @@ public class RongqiApplication extends Application {
                 .getRunningAppProcesses()) {
 
             if (appProcess.pid == pid) {
-
                 return appProcess.processName;
             }
         }

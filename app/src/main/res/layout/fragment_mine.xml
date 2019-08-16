@@ -1,11 +1,277 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/line_color_light"
+    android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:text="66666"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <com.fkh.support.ui.widget.TitleView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:isLeftDisplay="false"
+            app:titleText="我的" />
+
+        <RelativeLayout
+            android:id="@+id/loginLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/head"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ico_header_2x"
+                app:riv_border_width="0dip"
+                app:riv_corner_radius="100dip" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/extends_img"
+                android:layout_toRightOf="@+id/head"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+
+                    <TextView
+                        android:id="@+id/user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxEms="10"
+                        android:text="昵称"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/lable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:singleLine="true"
+                    android:text="添加个人简介..."
+                    android:textColor="@color/font_sub"
+                    android:textSize="13sp" />
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/extends_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="12dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_more" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_color" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/line_color_light" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_color" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:kvkey="我的裂变数据"
+            app:kvrightImage="@drawable/icon_more"
+            app:kvtextPreImage="@drawable/icon_me_2" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="16dp"
+            android:background="@color/line_color"
+            android:visibility="gone" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/mynews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvkey="消息"
+            app:kvrightImage="@drawable/icon_more"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="16dp"
+            android:background="@color/line_color" />
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingLeft="16dp"-->
+            <!--android:paddingTop="13dp"-->
+            <!--android:paddingRight="16dp"-->
+            <!--android:paddingBottom="13dp">-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<com.makeramen.roundedimageview.RoundedImageView-->
+                    <!--android:id="@+id/ivPreIcon"-->
+                    <!--android:layout_width="24dp"-->
+                    <!--android:layout_height="24dp"-->
+                    <!--android:layout_marginRight="16dp"-->
+                    <!--android:scaleType="centerCrop"-->
+                    <!--android:src="@drawable/icon_me_3"-->
+                    <!--app:riv_border_width="0dip"-->
+                    <!--app:riv_corner_radius="100dip" />-->
+
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_toRightOf="@+id/ivPreIcon"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:text="消息免打扰"-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:textSize="16sp" />-->
+
+            <!--</RelativeLayout>-->
+
+
+            <!--<com.fkh.support.ui.widget.CheckView-->
+                <!--android:id="@+id/checkView1"-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="28dp"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_toLeftOf="@+id/ivRightImage" />-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/ivRightImage"-->
+                <!--android:layout_width="18dp"-->
+                <!--android:layout_height="18dp"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:visibility="gone" />-->
+        <!--</RelativeLayout>-->
+
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:kvkey="消息免打扰"
+            app:kvrightImage="@drawable/icon_more" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_color" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/line_color_light" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_color" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:kvkey="登录电脑版"
+            app:kvrightImage="@drawable/icon_more" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="16dp"
+            android:background="@color/line_color"
+            android:visibility="gone" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/kefuphone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvkey="联系客服"
+            app:kvrightImage="@drawable/icon_more" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="16dp"
+            android:background="@color/line_color" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:kvkey="装企营销宝典"
+            app:kvrightImage="@drawable/icon_more"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_color"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/line_color_light" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_color" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/aboat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvkey="关于启华"
+            app:kvrightImage="@drawable/icon_more" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_color" />
+
+
+    </LinearLayout>
 
 </LinearLayout>

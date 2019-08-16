@@ -229,7 +229,7 @@
         <Button
             android:id="@+id/reserveBtn"
             style="@style/ButtonStyle"
-            android:text="注册" />
+            android:text="信息注册" />
 
     </LinearLayout>
 

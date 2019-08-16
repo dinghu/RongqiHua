@@ -1,5 +1,7 @@
 package com.rongqi.hua.rongqihua.activity;
 
+import android.content.Intent;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -19,17 +21,19 @@ import butterknife.OnClick;
 /**
  * Created by dinghu on 2019/8/16.
  */
-public class RegistActivity extends RqBaseActivity {
+public class LoginActivity extends RqBaseActivity {
     @BindView(R.id.account_value)
     EditText accountValue;
     @BindView(R.id.password_value)
     EditText passwordValue;
-    @BindView(R.id.next)
-    TextView next;
+    @BindView(R.id.login)
+    TextView login;
+    @BindView(R.id.regist)
+    TextView regist;
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_user_regist;
+        return R.layout.activity_user_login;
     }
 
     @Override
@@ -37,11 +41,11 @@ public class RegistActivity extends RqBaseActivity {
 
     }
 
-    private void doRegist() {
+    private void doLogin() {
         showLoading();
         String account = accountValue.getText().toString();
         String password = passwordValue.getText().toString();
-        RetrofitHelper.sendRequest(apiService.adminInsert(new AccountReq(account, password)), new ResponseListener<BaseResp>() {
+        RetrofitHelper.sendRequest(apiService.login(new AccountReq(account, password)), new ResponseListener<BaseResp>() {
             @Override
             public void onSuccess(BaseResp baseResp) {
                 hideLoading();
@@ -56,8 +60,15 @@ public class RegistActivity extends RqBaseActivity {
         });
     }
 
-    @OnClick(R.id.next)
-    public void onViewClicked() {
-        doRegist();
+    @OnClick({R.id.login, R.id.regist})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.login:
+                doLogin();
+                break;
+            case R.id.regist:
+                startActivity(new Intent(this, RegistActivity.class));
+                break;
+        }
     }
 }

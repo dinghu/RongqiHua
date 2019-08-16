@@ -7,4 +7,8 @@
     <color name="divide_line">#dedede</color>
     <color name="line_color">#c8cdcf</color>
     <color name="colorTheme">#42bd56</color>
+
+    <color name="font_color">@color/black</color>
+    <color name="font_sub">#dedede</color>
+    <color name="font_sub959595">#959595</color>
 </resources>

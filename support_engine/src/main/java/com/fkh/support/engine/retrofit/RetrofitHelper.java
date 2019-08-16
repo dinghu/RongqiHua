@@ -36,6 +36,10 @@ public class RetrofitHelper {
         return instance;
     }
 
+    public static <T> T createService(final Class<T> service) {
+        return getInstance().getRetrofit().create(service);
+    }
+
     public Retrofit getRetrofit() {
         return mRetrofit;
     }
