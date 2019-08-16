@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -32,9 +33,8 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape_edit" />
+                android:id="@+id/tvName"
+                style="@style/EditTextStyle"/>
         </LinearLayout>
 
         <LinearLayout
@@ -54,16 +54,19 @@
                 android:textSize="16sp" />
 
             <RadioGroup
+                android:id="@+id/sexGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/boy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="男" />
 
                 <RadioButton
+                    android:id="@+id/girl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="女" />
@@ -88,10 +91,9 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape_edit" />
+            <TextView
+                android:id="@+id/tvBirthDay"
+                style="@style/EditTextStyle" />
         </LinearLayout>
 
         <LinearLayout
@@ -110,10 +112,9 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape_edit" />
+            <TextView
+                android:id="@+id/workStart"
+                style="@style/EditTextStyle" />
         </LinearLayout>
 
         <LinearLayout
@@ -133,9 +134,8 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape_edit" />
+                android:id="@+id/shenfenCode"
+                style="@style/EditTextStyle" />
         </LinearLayout>
 
         <LinearLayout
@@ -155,9 +155,8 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape_edit" />
+                android:id="@+id/telphone"
+                style="@style/EditTextStyle" />
         </LinearLayout>
 
         <LinearLayout
@@ -177,9 +176,8 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape_edit" />
+                android:id="@+id/mail"
+                style="@style/EditTextStyle" />
         </LinearLayout>
 
         <LinearLayout
@@ -199,9 +197,8 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape_edit" />
+                android:id="@+id/address"
+                style="@style/EditTextStyle"/>
         </LinearLayout>
 
         <LinearLayout
@@ -221,9 +218,8 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape_edit" />
+                android:id="@+id/joinCode"
+                style="@style/EditTextStyle" />
         </LinearLayout>
 
         <Button
