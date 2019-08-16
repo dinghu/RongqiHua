@@ -23,6 +23,7 @@
         <activity android:name=".activity.RegisInfotActivity" />
         <activity android:name=".activity.MyDevelopersActivity" />
         <activity android:name=".activity.MyChidrensAvtivity"/>
+        <activity android:name=".activity.AddDeveloperActivity"/>
     </application>
 
 </manifest>
