@@ -20,11 +20,9 @@ import com.rongqi.hua.rongqihua.R;
 import com.rongqi.hua.rongqihua.activity.MyDevelopersActivity;
 import com.rongqi.hua.rongqihua.activity.RegisInfotActivity;
 import com.rongqi.hua.rongqihua.base.RqBaseFragment;
-import com.rongqi.hua.rongqihua.entity.resp.BaseResp;
 import com.rongqi.hua.rongqihua.entity.resp.NewsItem;
 import com.rongqi.hua.rongqihua.uitls.ActivityUtils;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
