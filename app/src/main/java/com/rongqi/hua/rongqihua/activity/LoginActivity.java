@@ -39,6 +39,10 @@ public class LoginActivity extends RqBaseActivity {
 
     }
 
+    public void userAccept(){
+//        RetrofitHelper.sendRequest();
+    }
+
     private void doLogin() {
         showLoading();
         String account = accountValue.getText().toString();
@@ -46,6 +50,7 @@ public class LoginActivity extends RqBaseActivity {
         RetrofitHelper.sendRequest(apiService.login(new AccountReq(account, password)), new ResponseListener<BaseResp>() {
             @Override
             public void onSuccess(BaseResp baseResp) {
+
                 hideLoading();
                 ToastUtils.showLong(baseResp.message);
             }

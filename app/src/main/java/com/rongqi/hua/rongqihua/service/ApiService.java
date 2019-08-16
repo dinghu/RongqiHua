@@ -34,4 +34,7 @@ public interface ApiService {
     //我的业绩
     @POST("student/selectByTid")
     Call<ResponseBody> myYejipersons(@Query("uuId") String uuId);
+
+    @POST("userlog/insert")
+    Call<ResponseBody> userlogInsert(@Query("uuId") String uuId);
 }
