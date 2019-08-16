@@ -26,4 +26,8 @@ public interface ApiService {
 
     @POST("rela/orderInfo")
     Call<ResponseBody> relaOrderInfo(@Query("num") Integer num);
+
+
+    @POST("teacher/selectByTid")
+    Call<ResponseBody> mydevelopTeachers(@Query("uuId") String uuId);
 }

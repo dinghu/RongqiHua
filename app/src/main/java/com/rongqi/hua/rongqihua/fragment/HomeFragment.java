@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.rongqi.hua.rongqihua.R;
+import com.rongqi.hua.rongqihua.activity.MyDevelopersActivity;
 import com.rongqi.hua.rongqihua.activity.RegisInfotActivity;
 import com.rongqi.hua.rongqihua.base.RqBaseFragment;
 import com.rongqi.hua.rongqihua.entity.resp.BaseResp;
@@ -53,13 +54,13 @@ public class HomeFragment extends RqBaseFragment {
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
     BaseListAdapter newsAdapter;
+    private ArrayList<NewsItem> news = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_home;
     }
 
-    private ArrayList<NewsItem> news = new ArrayList<>();
 
     class ViewHolder {
         TextView content;
@@ -108,10 +109,10 @@ public class HomeFragment extends RqBaseFragment {
 
             @Override
             public void initializeViews(int position, NewsItem s, ViewHolder viewHolder) {
-                String displayString = s.getTeacherName() + "在" +
+                String displayString = s.getTeacherName() + " 在 " +
                         TimeUtils.date2String(new Date(s.getInsertDate())) +
-                        (s.getType() == 2 ? "成功" : "失败") + "发展" + s.getStudentName()
-                        + "合伙人";
+                        (s.getType() == 2 ? " 成功" : " 失败") + "发展 " + s.getStudentName()
+                        + " 合伙人";
                 viewHolder.content.setText(displayString);
             }
         });
@@ -124,7 +125,11 @@ public class HomeFragment extends RqBaseFragment {
             case R.id.company_setting:
                 ActivityUtils.startActivity(getContext(), RegisInfotActivity.class);
                 break;
+            case R.id.company_bindweichat:
+                ActivityUtils.startActivity(getContext(), MyDevelopersActivity.class);
+                break;
             case R.id.company_info:
+                ActivityUtils.startActivity(getContext(), RegisInfotActivity.class);
                 break;
         }
     }
