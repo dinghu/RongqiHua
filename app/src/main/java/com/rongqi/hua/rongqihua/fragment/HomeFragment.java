@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.rongqi.hua.rongqihua.R;
+import com.rongqi.hua.rongqihua.activity.MyChidrensAvtivity;
 import com.rongqi.hua.rongqihua.activity.MyDevelopersActivity;
 import com.rongqi.hua.rongqihua.activity.RegisInfotActivity;
 import com.rongqi.hua.rongqihua.base.RqBaseFragment;
@@ -117,7 +118,7 @@ public class HomeFragment extends RqBaseFragment {
 
     }
 
-    @OnClick({R.id.company_setting, R.id.company_info})
+    @OnClick({R.id.company_setting, R.id.company_info,R.id.company_bindweichat})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.company_setting:
@@ -127,7 +128,7 @@ public class HomeFragment extends RqBaseFragment {
                 ActivityUtils.startActivity(getContext(), MyDevelopersActivity.class);
                 break;
             case R.id.company_info:
-                ActivityUtils.startActivity(getContext(), RegisInfotActivity.class);
+                ActivityUtils.startActivity(getContext(), MyChidrensAvtivity.class);
                 break;
         }
     }

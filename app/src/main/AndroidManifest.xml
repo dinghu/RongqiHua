@@ -22,6 +22,7 @@
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.RegisInfotActivity" />
         <activity android:name=".activity.MyDevelopersActivity" />
+        <activity android:name=".activity.MyChidrensAvtivity"/>
     </application>
 
 </manifest>
