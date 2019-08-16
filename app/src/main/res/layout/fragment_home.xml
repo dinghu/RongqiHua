@@ -168,22 +168,39 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="16dp"
+                android:text="最新消息"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <include layout="@layout/common_divide_line" />
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--android:layout_marginBottom="16dp"-->
+            <!--android:background="@drawable/shape_news">-->
+
+            <com.fkh.support.ui.widget.ScrollListView
+                android:id="@+id/newsList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/shape_news">
+                android:divider="@color/transparent"
+                android:dividerHeight="0dp"
+                android:footerDividersEnabled="true"
+                android:scrollbars="none">
 
-                <com.fkh.support.ui.widget.ScrollListView
-                    android:id="@+id/newsList"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            </com.fkh.support.ui.widget.ScrollListView>
 
-                </com.fkh.support.ui.widget.ScrollListView>
-
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
         </LinearLayout>
 
