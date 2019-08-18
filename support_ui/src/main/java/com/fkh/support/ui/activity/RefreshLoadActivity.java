@@ -90,7 +90,7 @@ public abstract class RefreshLoadActivity<T> extends BaseActivity {
     public void notifyDataSetChanged(boolean noMoreData) {
         if (mData != null && !mData.isEmpty()) {
             if (noData != null) {
-                noData.setVisibility(View.VISIBLE);
+                noData.setVisibility(View.GONE);
             }
         }
 

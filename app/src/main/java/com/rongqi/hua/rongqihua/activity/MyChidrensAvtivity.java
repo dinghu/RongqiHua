@@ -1,20 +1,23 @@
 package com.rongqi.hua.rongqihua.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.GsonUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.fkh.support.engine.retrofit.ResponseListener;
 import com.fkh.support.engine.retrofit.RetrofitHelper;
 import com.fkh.support.ui.activity.RefreshLoadListViewActivity;
+import com.fkh.support.ui.widget.TitleView;
 import com.google.gson.reflect.TypeToken;
 import com.rongqi.hua.rongqihua.R;
 import com.rongqi.hua.rongqihua.entity.resp.Child;
 import com.rongqi.hua.rongqihua.entity.resp.Developer;
 import com.rongqi.hua.rongqihua.service.ApiService;
+import com.rongqi.hua.rongqihua.uitls.ActivityUtils;
+import com.rongqi.hua.rongqihua.uitls.UserUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
@@ -37,6 +40,8 @@ public class MyChidrensAvtivity extends RefreshLoadListViewActivity<Child, MyChi
     SmartRefreshLayout smartRefreshLayout;
     @BindView(R.id.noDataView)
     TextView noDataView;
+    @BindView(R.id.titleView)
+    TitleView titleView;
     private ArrayList<Child> childrens = new ArrayList<>();
     ApiService apiService = RetrofitHelper.createService(ApiService.class);
 
@@ -57,11 +62,11 @@ public class MyChidrensAvtivity extends RefreshLoadListViewActivity<Child, MyChi
 
     @Override
     public void getData(int page, boolean isRefreh) {
-        RetrofitHelper.sendRequest(apiService.myYejipersons(""), new ResponseListener<ResponseBody>() {
+        RetrofitHelper.sendRequest(apiService.myYejipersons(UserUtils.getToken()), new ResponseListener<ResponseBody>() {
             @Override
             public void onSuccess(ResponseBody body) {
                 try {
-                    List<Child> childList = GsonUtils.fromJson(body.string(), new TypeToken<List<Developer>>() {
+                    List<Child> childList = GsonUtils.fromJson(body.string(), new TypeToken<List<Child>>() {
                     }.getType());
                     dealDataRecive(childList, false);
                 } catch (Exception e) {
@@ -84,6 +89,12 @@ public class MyChidrensAvtivity extends RefreshLoadListViewActivity<Child, MyChi
 
     @Override
     protected void initView() {
+        titleView.setOnClickRightListener(new TitleView.OnClickRightListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityUtils.startActivity(MyChidrensAvtivity.this,AddChildActivity.class);
+            }
+        });
         bindView(smartRefreshLayout, list, childrens);
     }
 

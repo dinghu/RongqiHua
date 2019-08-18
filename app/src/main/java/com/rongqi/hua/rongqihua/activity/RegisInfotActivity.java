@@ -18,6 +18,9 @@ import com.rongqi.hua.rongqihua.R;
 import com.rongqi.hua.rongqihua.base.RqBaseActivity;
 import com.rongqi.hua.rongqihua.entity.req.RegistInfoReq;
 import com.rongqi.hua.rongqihua.entity.resp.BaseResp;
+import com.rongqi.hua.rongqihua.entity.resp.DataResp;
+import com.rongqi.hua.rongqihua.entity.resp.TUserInfo;
+import com.rongqi.hua.rongqihua.uitls.UserUtils;
 
 import java.util.Date;
 
@@ -79,14 +82,14 @@ public class RegisInfotActivity extends RqBaseActivity {
                 dialog.setOnChangeLisener(new OnChangeLisener() {
                     @Override
                     public void onChanged(Date date) {
-                        tvBirthDay.setText(TimeUtils.date2String(date,"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
+                        tvBirthDay.setText(TimeUtils.date2String(date, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
                     }
                 });
                 //设置点击确定按钮回调
                 dialog.setOnSureLisener(new OnSureLisener() {
                     @Override
                     public void onSure(Date date) {
-                        tvBirthDay.setText(TimeUtils.date2String(date,"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
+                        tvBirthDay.setText(TimeUtils.date2String(date, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
                     }
                 });
                 dialog.show();
@@ -105,14 +108,14 @@ public class RegisInfotActivity extends RqBaseActivity {
                 dialogStart.setOnChangeLisener(new OnChangeLisener() {
                     @Override
                     public void onChanged(Date date) {
-                        workStart.setText(TimeUtils.date2String(date,"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
+                        workStart.setText(TimeUtils.date2String(date, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
                     }
                 });
                 //设置点击确定按钮回调
                 dialogStart.setOnSureLisener(new OnSureLisener() {
                     @Override
                     public void onSure(Date date) {
-                        workStart.setText(TimeUtils.date2String(date,"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
+                        workStart.setText(TimeUtils.date2String(date, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
                     }
                 });
                 dialogStart.show();
@@ -120,20 +123,25 @@ public class RegisInfotActivity extends RqBaseActivity {
             case R.id.reserveBtn:
                 String invCode = joinCode.getText().toString();
                 RegistInfoReq registInfoReq = new RegistInfoReq();
+                registInfoReq.name = tvName.getText().toString();
                 registInfoReq.birth = tvBirthDay.getText().toString();
                 registInfoReq.hiredate = workStart.getText().toString();
                 registInfoReq.sex = boy.isChecked();
                 registInfoReq.email = mail.getText().toString();
                 registInfoReq.phone = telphone.getText().toString();
                 registInfoReq.invCode = invCode;
-                registInfoReq.lastTime = TimeUtils.millis2String(System.currentTimeMillis(),"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                registInfoReq.lastTime = TimeUtils.millis2String(System.currentTimeMillis(), "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                 registInfoReq.nick = tvName.getText().toString();
                 registInfoReq.place = address.getText().toString();
-                registInfoReq.tUuid = "";
+                registInfoReq.tUuid = UserUtils.getToken();
+                registInfoReq.nid = shenfenCode.getText().toString();
                 showLoading();
-                RetrofitHelper.sendRequest(apiService.teacherInsert(invCode, registInfoReq), new ResponseListener<BaseResp>() {
+                RetrofitHelper.sendRequest(apiService.teacherInsert(invCode, registInfoReq), new ResponseListener<DataResp<TUserInfo>>() {
                     @Override
-                    public void onSuccess(BaseResp baseResp) {
+                    public void onSuccess(DataResp<TUserInfo> baseResp) {
+                        if (baseResp.data != null) {
+                            UserUtils.saveUserInfo(baseResp.data);
+                        }
                         hideLoading();
                         ToastUtils.showLong(baseResp.message);
                     }

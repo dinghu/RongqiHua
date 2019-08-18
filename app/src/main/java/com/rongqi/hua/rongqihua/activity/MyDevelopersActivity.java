@@ -12,11 +12,14 @@ import com.fkh.support.engine.retrofit.RetrofitHelper;
 import com.fkh.support.ui.activity.RefreshLoadListViewActivity;
 import com.fkh.support.ui.adapter.BaseListAdapter;
 import com.fkh.support.ui.widget.TitleView;
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.rongqi.hua.rongqihua.R;
 import com.rongqi.hua.rongqihua.entity.resp.Developer;
+import com.rongqi.hua.rongqihua.entity.resp.NewsItem;
 import com.rongqi.hua.rongqihua.service.ApiService;
 import com.rongqi.hua.rongqihua.uitls.ActivityUtils;
+import com.rongqi.hua.rongqihua.uitls.UserUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
@@ -63,11 +66,12 @@ public class MyDevelopersActivity extends RefreshLoadListViewActivity<Developer,
 
     @Override
     public void getData(int page, boolean isRefreh) {
-        RetrofitHelper.sendRequest(apiService.mydevelopTeachers(""), new ResponseListener<ResponseBody>() {
+        RetrofitHelper.sendRequest(apiService.mydevelopTeachers(UserUtils.getToken()), new ResponseListener<ResponseBody>() {
             @Override
             public void onSuccess(ResponseBody body) {
                 try {
-                    List<Developer> developers = GsonUtils.fromJson(body.string(), new TypeToken<List<Developer>>() {
+                    String bodyString = body.string();
+                    List<Developer> developers = GsonUtils.fromJson(bodyString, new TypeToken<List<Developer>>() {
                     }.getType());
                     dealDataRecive(developers, false);
                 } catch (Exception e) {

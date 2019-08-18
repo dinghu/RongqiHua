@@ -24,6 +24,8 @@
         <activity android:name=".activity.MyDevelopersActivity" />
         <activity android:name=".activity.MyChidrensAvtivity"/>
         <activity android:name=".activity.AddDeveloperActivity"/>
+        <activity android:name=".activity.MyRegisInfoDetailActivity"/>
+        <activity android:name=".activity.AddChildActivity"/>
     </application>
 
 </manifest>

@@ -23,6 +23,7 @@ import com.rongqi.hua.rongqihua.activity.RegisInfotActivity;
 import com.rongqi.hua.rongqihua.base.RqBaseFragment;
 import com.rongqi.hua.rongqihua.entity.resp.NewsItem;
 import com.rongqi.hua.rongqihua.uitls.ActivityUtils;
+import com.rongqi.hua.rongqihua.uitls.UserUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -118,10 +119,14 @@ public class HomeFragment extends RqBaseFragment {
 
     }
 
-    @OnClick({R.id.company_setting, R.id.company_info,R.id.company_bindweichat})
+    @OnClick({R.id.company_setting, R.id.company_info, R.id.company_bindweichat})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.company_setting:
+                if (!UserUtils.isLogin()) {
+                    UserUtils.reqLogin(getContext());
+                    return;
+                }
                 ActivityUtils.startActivity(getContext(), RegisInfotActivity.class);
                 break;
             case R.id.company_bindweichat:

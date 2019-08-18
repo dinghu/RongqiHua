@@ -9,6 +9,10 @@ import com.fkh.support.ui.fragment.BaseFragment;
 import com.fkh.support.ui.widget.KeyValueView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.rongqi.hua.rongqihua.R;
+import com.rongqi.hua.rongqihua.activity.MyChidrensAvtivity;
+import com.rongqi.hua.rongqihua.activity.MyRegisInfoDetailActivity;
+import com.rongqi.hua.rongqihua.activity.RegisInfotActivity;
+import com.rongqi.hua.rongqihua.uitls.ActivityUtils;
 import com.rongqi.hua.rongqihua.uitls.UserUtils;
 
 import butterknife.BindView;
@@ -48,10 +52,24 @@ public class MineFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (UserUtils.isLogin()) {
+            userName.setText(UserUtils.getDisplayName());
+        }
+    }
+
     @OnClick(R.id.loginLay)
     public void onViewClicked() {
         if (!UserUtils.isLogin()) {
             UserUtils.reqLogin(getContext());
+        }else {
+            if (UserUtils.getUserInfo() == null){
+                ActivityUtils.startActivity(getContext(), RegisInfotActivity.class);
+            }else {
+                ActivityUtils.startActivity(getContext(), MyRegisInfoDetailActivity.class);
+            }
         }
     }
 }

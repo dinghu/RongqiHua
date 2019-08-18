@@ -16,6 +16,8 @@ public class Child {
      * type : 学生
      */
 
+
+
     @SerializedName("major")
     private String major;
     @SerializedName("phone")
@@ -28,6 +30,13 @@ public class Child {
     private String nid;
     @SerializedName("type")
     private String type;
+    /**
+     * graduate : string
+     * sId : 0
+     */
+
+    private String graduate;
+    private int sId;
 
     public String getMajor() {
         return major;
@@ -75,5 +84,21 @@ public class Child {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getGraduate() {
+        return graduate;
+    }
+
+    public void setGraduate(String graduate) {
+        this.graduate = graduate;
+    }
+
+    public int getSId() {
+        return sId;
+    }
+
+    public void setSId(int sId) {
+        this.sId = sId;
     }
 }
