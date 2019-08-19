@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#42bd56</color>
-    <color name="colorPrimaryDark">#42bd56</color>
-    <color name="colorAccent">#42bd56</color>
+    <color name="colorPrimary">#64bec9</color>
+    <color name="colorPrimaryDark">#64bec9</color>
+    <color name="colorAccent">#64bec9</color>
 
     <color name="divide_line">#dedede</color>
     <color name="line_color">#c8cdcf</color>
-    <color name="colorTheme">#42bd56</color>
+    <!--<color name="colorTheme">#42bd56</color>-->
+    <color name="colorTheme">#64bec9</color>
 
     <color name="font_color">@color/black</color>
     <color name="font_sub">#dedede</color>
