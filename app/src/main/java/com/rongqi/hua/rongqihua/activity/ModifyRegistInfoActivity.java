@@ -7,7 +7,6 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.fkh.support.engine.retrofit.ResponseListener;
 import com.fkh.support.engine.retrofit.RetrofitHelper;
 import com.rongqi.hua.rongqihua.entity.req.RegistInfoReq;
-import com.rongqi.hua.rongqihua.entity.resp.DataResp;
 import com.rongqi.hua.rongqihua.entity.resp.TUserInfo;
 import com.rongqi.hua.rongqihua.uitls.UserUtils;
 
