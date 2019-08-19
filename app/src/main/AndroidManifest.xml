@@ -2,6 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rongqi.hua.rongqihua">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 权限声明 -->
+    <!-- 访问网络状态-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 外置存储存取权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:name=".application.RongqiApplication"
         android:allowBackup="true"
@@ -21,13 +31,13 @@
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.RegisInfotActivity" />
         <activity android:name=".activity.MyDevelopersActivity" />
-        <activity android:name=".activity.MyChidrensAvtivity"/>
-        <activity android:name=".activity.AddDeveloperActivity"/>
-        <activity android:name=".activity.MyRegisInfoDetailActivity"/>
-        <activity android:name=".activity.AddChildActivity"/>
-        <activity android:name=".activity.AboatActivity"/>
-        <activity android:name=".activity.ModifyRegistInfoActivity"/>
-        <activity android:name=".activity.ZhengceActivity"/>
+        <activity android:name=".activity.MyChidrensAvtivity" />
+        <activity android:name=".activity.AddDeveloperActivity" />
+        <activity android:name=".activity.MyRegisInfoDetailActivity" />
+        <activity android:name=".activity.AddChildActivity" />
+        <activity android:name=".activity.AboatActivity" />
+        <activity android:name=".activity.ModifyRegistInfoActivity" />
+        <activity android:name=".activity.ZhengceActivity" />
     </application>
 
 </manifest>

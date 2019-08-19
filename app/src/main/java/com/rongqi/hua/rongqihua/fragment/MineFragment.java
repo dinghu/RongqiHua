@@ -66,11 +66,6 @@ public class MineFragment extends BaseFragment {
         }
     }
 
-    @OnClick(R.id.kefuphone)
-    public void onKefuphoneClicked() {
-        PermissionGen.with(this).addRequestCode(100).permissions(Manifest.permission.CALL_PHONE).request();
-    }
-
     /**
      * 拨打电话（跳转到拨号界面，用户手动点击拨打）
      *
