@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/kvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvitemPadding="5sp"
+            app:kvkey="招生老师姓名:"
+            app:kvkeyTextSize="12sp"
+            app:kvkeyvalueSpace="1dp"
+            app:kvvalueGravity="left"
+            app:kvvalueTextSize="12sp"
+            tools:kvvalue="招生老师姓名" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/sex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvitemPadding="5sp"
+            app:kvkey="性别:"
+            app:kvkeyTextSize="12sp"
+            app:kvkeyvalueSpace="1dp"
+            app:kvvalueGravity="left"
+            app:kvvalueTextSize="12sp"
+            tools:kvvalue="女" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/workCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvitemPadding="5sp"
+            app:kvkey="工号:"
+            app:kvkeyTextSize="12sp"
+            app:kvkeyvalueSpace="1dp"
+            app:kvvalueGravity="left"
+            app:kvvalueTextSize="12sp"
+            tools:kvvalue="123" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/shenfenCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvitemPadding="5sp"
+            app:kvkey="身份证号码:"
+            app:kvkeyTextSize="12sp"
+            app:kvkeyvalueSpace="1dp"
+            app:kvvalue=""
+            app:kvvalueGravity="left"
+            app:kvvalueTextSize="12sp" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvitemPadding="5sp"
+            app:kvkey="电话号码:"
+            app:kvkeyTextSize="12sp"
+            app:kvkeyvalueSpace="1dp"
+            app:kvvalueGravity="left"
+            app:kvvalueTextSize="12sp"
+            tools:kvvalue="1111111" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvitemPadding="5sp"
+            app:kvkey="邮箱:"
+            app:kvkeyTextSize="12sp"
+            app:kvkeyvalueSpace="1dp"
+            app:kvvalueGravity="left"
+            app:kvvalueTextSize="12sp"
+            tools:kvvalue="4444444444@qq.com" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/birthDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvitemPadding="5sp"
+            app:kvkey="出生年月:"
+            app:kvkeyTextSize="12sp"
+            app:kvkeyvalueSpace="1dp"
+            app:kvvalueGravity="left"
+            app:kvvalueTextSize="12sp"
+            tools:kvvalue="1986/1/1" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/hireday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvitemPadding="5sp"
+            app:kvkey="入职日期:"
+            app:kvkeyTextSize="12sp"
+            app:kvkeyvalueSpace="1dp"
+            app:kvvalueGravity="left"
+            app:kvvalueTextSize="12sp"
+            tools:kvvalue="1986/1/1" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvitemPadding="5sp"
+            app:kvkey="住址:"
+            app:kvkeyTextSize="12sp"
+            app:kvkeyvalueSpace="1dp"
+            app:kvvalueGravity="left"
+            app:kvvalueTextSize="12sp"
+            tools:kvvalue="招生老师姓名" />
+    </LinearLayout>
+</LinearLayout>

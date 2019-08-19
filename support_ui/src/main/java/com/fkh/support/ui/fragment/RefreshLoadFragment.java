@@ -17,24 +17,18 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.List;
 
-public abstract class RefreshLoadFragment<T> extends Fragment {
+public abstract class RefreshLoadFragment<T> extends BaseFragment {
     protected SmartRefreshLayout swipeRefreshLayout;
     private List<T> mData;
     protected View noData;
     protected int page = 1;
+    protected long mLastLoadingTime = 0;
 
     public void setNoDataView(View noData) {
         this.noData = noData;
     }
 
-
     public abstract void getData(int page, boolean isRefreh);
-
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
 
     protected void bindView(SmartRefreshLayout swipeRefreshLayout, List<T> mData) {
         this.swipeRefreshLayout = swipeRefreshLayout;
@@ -48,6 +42,7 @@ public abstract class RefreshLoadFragment<T> extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
+                mLastLoadingTime = System.currentTimeMillis();
                 page = 1;
                 getData(page, true);
             }
@@ -55,6 +50,7 @@ public abstract class RefreshLoadFragment<T> extends Fragment {
         swipeRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
+                mLastLoadingTime = System.currentTimeMillis();
                 getData(++page, false);
             }
         });
@@ -88,6 +84,25 @@ public abstract class RefreshLoadFragment<T> extends Fragment {
                 swipeRefreshLayout.finishLoadMoreWithNoMoreData();
             }
         }
+
+    }
+
+    public void dealDataRecive(final List<T> reciveData, final boolean noMoreData) {
+        final boolean isRefresh = swipeRefreshLayout.isRefreshing();
+        long passTime = System.currentTimeMillis() - mLastLoadingTime;
+
+        //保持最少1秒得延时
+        int needDelay = Math.max(0, 200 - (int) passTime);
+        swipeRefreshLayout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (isRefresh) {
+                    mData.clear();
+                }
+                mData.addAll(reciveData);
+                notifyDataSetChanged(noMoreData);
+            }
+        }, needDelay);
 
     }
 

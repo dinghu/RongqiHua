@@ -1,7 +1,10 @@
 package com.rongqi.hua.rongqihua.activity;
 
+import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -14,10 +17,10 @@ import com.codbking.widget.OnSureLisener;
 import com.codbking.widget.bean.DateType;
 import com.fkh.support.engine.retrofit.ResponseListener;
 import com.fkh.support.engine.retrofit.RetrofitHelper;
+import com.fkh.support.ui.widget.TitleView;
 import com.rongqi.hua.rongqihua.R;
 import com.rongqi.hua.rongqihua.base.RqBaseActivity;
 import com.rongqi.hua.rongqihua.entity.req.RegistInfoReq;
-import com.rongqi.hua.rongqihua.entity.resp.BaseResp;
 import com.rongqi.hua.rongqihua.entity.resp.DataResp;
 import com.rongqi.hua.rongqihua.entity.resp.TUserInfo;
 import com.rongqi.hua.rongqihua.uitls.UserUtils;
@@ -25,12 +28,15 @@ import com.rongqi.hua.rongqihua.uitls.UserUtils;
 import java.util.Date;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * Created by dinghu on 2019/8/15.
  */
 public class RegisInfotActivity extends RqBaseActivity {
+    @BindView(R.id.titleView)
+    TitleView titleView;
     @BindView(R.id.tvName)
     EditText tvName;
     @BindView(R.id.boy)
@@ -53,6 +59,14 @@ public class RegisInfotActivity extends RqBaseActivity {
     EditText address;
     @BindView(R.id.joinCode)
     EditText joinCode;
+    @BindView(R.id.workStartLay)
+    LinearLayout workStartLay;
+    @BindView(R.id.shenfenCodeLay)
+    LinearLayout shenfenCodeLay;
+    @BindView(R.id.joinCodeLay)
+    LinearLayout joinCodeLay;
+    @BindView(R.id.reserveBtn)
+    Button reserveBtn;
 
 
     @Override
@@ -63,6 +77,40 @@ public class RegisInfotActivity extends RqBaseActivity {
     @Override
     protected void initView() {
 
+    }
+
+    protected void onSubmit(){
+        String invCode = joinCode.getText().toString();
+        RegistInfoReq registInfoReq = new RegistInfoReq();
+        registInfoReq.name = tvName.getText().toString();
+        registInfoReq.birth = tvBirthDay.getText().toString();
+        registInfoReq.hiredate = workStart.getText().toString();
+        registInfoReq.sex = boy.isChecked();
+        registInfoReq.email = mail.getText().toString();
+        registInfoReq.phone = telphone.getText().toString();
+        registInfoReq.invCode = invCode;
+        registInfoReq.lastTime = TimeUtils.millis2String(System.currentTimeMillis(), "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        registInfoReq.nick = tvName.getText().toString();
+        registInfoReq.place = address.getText().toString();
+        registInfoReq.tUuid = UserUtils.getToken();
+        registInfoReq.nid = shenfenCode.getText().toString();
+        showLoading();
+        RetrofitHelper.sendRequest(apiService.teacherInsert(invCode, registInfoReq), new ResponseListener<DataResp<TUserInfo>>() {
+            @Override
+            public void onSuccess(DataResp<TUserInfo> baseResp) {
+                if (baseResp.data != null) {
+                    UserUtils.saveUserInfo(baseResp.data);
+                }
+                hideLoading();
+                ToastUtils.showLong(baseResp.message);
+            }
+
+            @Override
+            public void onFail(String code, String message) {
+                hideLoading();
+                ToastUtils.showLong(message);
+            }
+        });
     }
 
     @OnClick({R.id.tvBirthDay, R.id.workStart, R.id.reserveBtn})
@@ -121,37 +169,7 @@ public class RegisInfotActivity extends RqBaseActivity {
                 dialogStart.show();
                 break;
             case R.id.reserveBtn:
-                String invCode = joinCode.getText().toString();
-                RegistInfoReq registInfoReq = new RegistInfoReq();
-                registInfoReq.name = tvName.getText().toString();
-                registInfoReq.birth = tvBirthDay.getText().toString();
-                registInfoReq.hiredate = workStart.getText().toString();
-                registInfoReq.sex = boy.isChecked();
-                registInfoReq.email = mail.getText().toString();
-                registInfoReq.phone = telphone.getText().toString();
-                registInfoReq.invCode = invCode;
-                registInfoReq.lastTime = TimeUtils.millis2String(System.currentTimeMillis(), "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                registInfoReq.nick = tvName.getText().toString();
-                registInfoReq.place = address.getText().toString();
-                registInfoReq.tUuid = UserUtils.getToken();
-                registInfoReq.nid = shenfenCode.getText().toString();
-                showLoading();
-                RetrofitHelper.sendRequest(apiService.teacherInsert(invCode, registInfoReq), new ResponseListener<DataResp<TUserInfo>>() {
-                    @Override
-                    public void onSuccess(DataResp<TUserInfo> baseResp) {
-                        if (baseResp.data != null) {
-                            UserUtils.saveUserInfo(baseResp.data);
-                        }
-                        hideLoading();
-                        ToastUtils.showLong(baseResp.message);
-                    }
-
-                    @Override
-                    public void onFail(String code, String message) {
-                        hideLoading();
-                        ToastUtils.showLong(message);
-                    }
-                });
+                onSubmit();
                 break;
         }
     }

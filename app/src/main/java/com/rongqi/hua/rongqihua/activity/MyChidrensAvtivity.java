@@ -1,7 +1,7 @@
 package com.rongqi.hua.rongqihua.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -10,11 +10,11 @@ import com.blankj.utilcode.util.GsonUtils;
 import com.fkh.support.engine.retrofit.ResponseListener;
 import com.fkh.support.engine.retrofit.RetrofitHelper;
 import com.fkh.support.ui.activity.RefreshLoadListViewActivity;
+import com.fkh.support.ui.widget.KeyValueView;
 import com.fkh.support.ui.widget.TitleView;
 import com.google.gson.reflect.TypeToken;
 import com.rongqi.hua.rongqihua.R;
 import com.rongqi.hua.rongqihua.entity.resp.Child;
-import com.rongqi.hua.rongqihua.entity.resp.Developer;
 import com.rongqi.hua.rongqihua.service.ApiService;
 import com.rongqi.hua.rongqihua.uitls.ActivityUtils;
 import com.rongqi.hua.rongqihua.uitls.UserUtils;
@@ -47,7 +47,7 @@ public class MyChidrensAvtivity extends RefreshLoadListViewActivity<Child, MyChi
 
     @Override
     public int getItemLayout() {
-        return R.layout.item_news;
+        return R.layout.item_child;
     }
 
     @Override
@@ -57,7 +57,13 @@ public class MyChidrensAvtivity extends RefreshLoadListViewActivity<Child, MyChi
 
     @Override
     public void initializeViews(int position, Child child, ViewHolder viewHolder) {
-        viewHolder.content.setText(child.getName());
+        viewHolder.kvName.setValue(child.getName());
+        viewHolder.sex.setValue(child.isSex() ? "男" : "女");
+        viewHolder.shenfenCode.setValue(child.getNid());
+        viewHolder.phone.setValue(child.getPhone());
+        viewHolder.shenfenType.setValue(child.getType());
+        viewHolder.zuanye.setValue(child.getMajor());
+        viewHolder.yuanxiao.setValue(child.getGraduate());
     }
 
     @Override
@@ -68,7 +74,8 @@ public class MyChidrensAvtivity extends RefreshLoadListViewActivity<Child, MyChi
                 try {
                     List<Child> childList = GsonUtils.fromJson(body.string(), new TypeToken<List<Child>>() {
                     }.getType());
-                    dealDataRecive(childList, false);
+                    number.setText("共" + (childList != null ? childList.size() : 0) + "人");
+                    dealDataRecive(childList, true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -92,15 +99,36 @@ public class MyChidrensAvtivity extends RefreshLoadListViewActivity<Child, MyChi
         titleView.setOnClickRightListener(new TitleView.OnClickRightListener() {
             @Override
             public void onClick(View v) {
-                ActivityUtils.startActivity(MyChidrensAvtivity.this,AddChildActivity.class);
+                ActivityUtils.startActivityForResult(MyChidrensAvtivity.this, 1000, AddChildActivity.class);
             }
         });
         bindView(smartRefreshLayout, list, childrens);
     }
 
-    static class ViewHolder {
-        @BindView(R.id.content)
-        TextView content;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1000 && resultCode == RESULT_OK) {
+            refreshData();
+        }
+    }
+
+    class ViewHolder {
+        @BindView(R.id.kvName)
+        KeyValueView kvName;
+        @BindView(R.id.sex)
+        KeyValueView sex;
+        @BindView(R.id.shenfenCode)
+        KeyValueView shenfenCode;
+        @BindView(R.id.phone)
+        KeyValueView phone;
+        @BindView(R.id.shenfenType)
+        KeyValueView shenfenType;
+        @BindView(R.id.zuanye)
+        KeyValueView zuanye;
+        @BindView(R.id.yuanxiao)
+        KeyValueView yuanxiao;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);

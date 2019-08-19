@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <com.fkh.support.ui.widget.TitleView
+        android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
         app:titleText="信息注册" />
@@ -97,6 +98,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/workStartLay"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginTop="10dp"
@@ -118,6 +120,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/shenfenCodeLay"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginTop="10dp"
@@ -202,6 +205,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/joinCodeLay"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginTop="10dp"

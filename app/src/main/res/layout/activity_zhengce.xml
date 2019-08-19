@@ -6,15 +6,13 @@
     android:orientation="vertical">
 
     <com.fkh.support.ui.widget.TitleView
-        android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
-        app:rightText="编辑"
-        app:titleText="我的信息" />
+        app:titleText="招生简章" />
 
-    <com.fkh.support.ui.widget.KeyValueListView
-        android:id="@+id/keyValueListView"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:src="@drawable/zhaosheng" />
 
 </LinearLayout>

@@ -46,6 +46,10 @@ public class LoginActivity extends RqBaseActivity {
 
     }
 
+    public void onLoginSuc(){
+
+    }
+
     public void userAccept(final String uuid) {
         final String account = accountValue.getText().toString();
         UserLoginReq userLoginReq = new UserLoginReq();
@@ -81,18 +85,23 @@ public class LoginActivity extends RqBaseActivity {
 
     private void doLogin() {
         showLoading();
-        String account = accountValue.getText().toString();
+        final String account = accountValue.getText().toString();
         String password = passwordValue.getText().toString();
         RetrofitHelper.sendRequest(apiService.login(new AccountReq(account, password)), new ResponseListener<LoginResp>() {
             @Override
             public void onSuccess(LoginResp baseResp) {
                 LoginResp.UuidBean uuidBean = baseResp.data;
                 if (!uuidBean.isUserLog()) {
+                    //继续授权
                     userAccept(baseResp.data.getUuid());
                 }
                 if (uuidBean.isUserLog() && uuidBean.gettUserInfo() != null) {
+                    hideLoading();
                     //已经注册了信息
                     UserUtils.saveUserInfo(uuidBean.gettUserInfo());
+                    UserUtils.saveAccount(account);
+                    UserUtils.saveToken(uuidBean.getUuid());
+                    finish();
                 }
             }
 

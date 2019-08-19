@@ -16,5 +16,5 @@
         android:paddingBottom="10dp"
         tools:text="1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111" />
 
-    <include layout="@layout/common_divide_line"/>
+    <!--<include layout="@layout/common_divide_line"/>-->
 </LinearLayout>

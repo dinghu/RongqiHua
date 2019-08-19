@@ -1,5 +1,7 @@
 package com.rongqi.hua.rongqihua.entity.req;
 
+import com.rongqi.hua.rongqihua.entity.resp.TUserInfo;
+
 /**
  * Created by dinghu on 2019/8/16.
  */

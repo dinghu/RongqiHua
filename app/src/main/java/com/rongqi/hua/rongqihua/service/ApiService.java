@@ -29,6 +29,11 @@ public interface ApiService {
     @POST("teacher/insert")
     Call<DataResp<TUserInfo>> teacherInsert(@Query("invCode") String invCode, @Body RegistInfoReq registInfoReq);
 
+    //更新合伙人
+    @POST("teacher/updateByPrimaryKey")
+    Call<ResponseBody> teacherUpdate(@Body RegistInfoReq registInfoReq);
+
+
     @POST("rela/orderInfo")
     Call<ResponseBody> relaOrderInfo(@Query("num") Integer num);
 
@@ -61,4 +66,11 @@ public interface ApiService {
 //    typeId:人员类型，uuId:合伙人微信编号，name：学生（或者工人、汽车销售等）名字，nid:身份证号码，phone:电话号码，sId: 学生（或者工人、汽车销售等）编号，sex:性别，major:专业，graduate：毕业学校
     @POST("student/insert")
     Call<BaseResp> studentInsert(@Query("typeId") Integer typeId, @Query("uuId") String uuId, @Body Child child);
+
+    //查找人员类型
+    @POST("type/perType")
+    Call<ResponseBody> perType();
+
+    @POST("student/selectAllByTid")
+    Call<ResponseBody> selectAllChildByTid(@Query("uuid") String uuid);
 }

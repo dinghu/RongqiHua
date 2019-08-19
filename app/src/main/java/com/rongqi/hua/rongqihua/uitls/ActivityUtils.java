@@ -15,6 +15,11 @@ public class ActivityUtils {
         context.startActivity(intent);
     }
 
+    public static void startActivityForResult(Activity context,int requestCode, Class<?> activityClass) {
+        Intent intent = new Intent(context, activityClass);
+        context.startActivityForResult(intent,requestCode);
+    }
+
     public static void returnToActivity(Context context, Class<?> cls) {
         Intent intent = new Intent(context, cls);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);

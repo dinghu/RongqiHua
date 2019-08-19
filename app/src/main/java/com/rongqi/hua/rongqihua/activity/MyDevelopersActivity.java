@@ -1,22 +1,22 @@
 package com.rongqi.hua.rongqihua.activity;
 
-import android.os.Bundle;
+import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.GsonUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.fkh.support.engine.retrofit.ResponseListener;
 import com.fkh.support.engine.retrofit.RetrofitHelper;
 import com.fkh.support.ui.activity.RefreshLoadListViewActivity;
-import com.fkh.support.ui.adapter.BaseListAdapter;
+import com.fkh.support.ui.widget.KeyValueView;
 import com.fkh.support.ui.widget.TitleView;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.rongqi.hua.rongqihua.R;
 import com.rongqi.hua.rongqihua.entity.resp.Developer;
-import com.rongqi.hua.rongqihua.entity.resp.NewsItem;
 import com.rongqi.hua.rongqihua.service.ApiService;
 import com.rongqi.hua.rongqihua.uitls.ActivityUtils;
 import com.rongqi.hua.rongqihua.uitls.UserUtils;
@@ -42,9 +42,7 @@ public class MyDevelopersActivity extends RefreshLoadListViewActivity<Developer,
     SmartRefreshLayout smartRefreshLayout;
     @BindView(R.id.noDataView)
     TextView noDataView;
-
     ApiService apiService = RetrofitHelper.createService(ApiService.class);
-    BaseListAdapter developersAdapter;
     @BindView(R.id.titleView)
     TitleView titleView;
     private ArrayList<Developer> developers = new ArrayList<>();
@@ -56,12 +54,20 @@ public class MyDevelopersActivity extends RefreshLoadListViewActivity<Developer,
 
     @Override
     public int getItemLayout() {
-        return R.layout.item_news;
+        return R.layout.item_developer;
     }
 
     @Override
     public void initializeViews(int position, Developer s, ViewHolder viewHolder) {
-        viewHolder.content.setText(s.getName());
+        viewHolder.kvName.setValue(s.getName());
+        viewHolder.sex.setValue(s.isSex() ? "男" : "女");
+        viewHolder.workCode.setValue(s.getWorkId());
+        viewHolder.shenfenCode.setValue(s.getNid());
+        viewHolder.phone.setValue(s.getPhone());
+        viewHolder.email.setValue(s.getEmail());
+        viewHolder.birthDay.setValue(TimeUtils.millis2String(s.getBirth(), "yyyy/MM/dd"));
+        viewHolder.hireday.setValue(TimeUtils.millis2String(s.getHiredate(), "yyyy/MM/dd"));
+        viewHolder.address.setValue(s.getPlace());
     }
 
     @Override
@@ -73,7 +79,8 @@ public class MyDevelopersActivity extends RefreshLoadListViewActivity<Developer,
                     String bodyString = body.string();
                     List<Developer> developers = GsonUtils.fromJson(bodyString, new TypeToken<List<Developer>>() {
                     }.getType());
-                    dealDataRecive(developers, false);
+                    number.setText("共" + (developers != null ? developers.size() : 0) + "人");
+                    dealDataRecive(developers, true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -97,11 +104,20 @@ public class MyDevelopersActivity extends RefreshLoadListViewActivity<Developer,
         titleView.setOnClickRightListener(new TitleView.OnClickRightListener() {
             @Override
             public void onClick(View v) {
-                ActivityUtils.startActivity(MyDevelopersActivity.this, AddDeveloperActivity.class);
+                ActivityUtils.startActivityForResult(MyDevelopersActivity.this, 1000,
+                        AddDeveloperActivity.class);
             }
         });
         bindView(smartRefreshLayout, list, developers);
         setNoDataView(noDataView);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1000 && resultCode == RESULT_OK) {
+            refreshData();
+        }
     }
 
 
@@ -109,9 +125,25 @@ public class MyDevelopersActivity extends RefreshLoadListViewActivity<Developer,
     public void onViewClicked() {
     }
 
-    static class ViewHolder {
-        @BindView(R.id.content)
-        TextView content;
+    class ViewHolder {
+        @BindView(R.id.kvName)
+        KeyValueView kvName;
+        @BindView(R.id.sex)
+        KeyValueView sex;
+        @BindView(R.id.workCode)
+        KeyValueView workCode;
+        @BindView(R.id.shenfenCode)
+        KeyValueView shenfenCode;
+        @BindView(R.id.phone)
+        KeyValueView phone;
+        @BindView(R.id.email)
+        KeyValueView email;
+        @BindView(R.id.birthDay)
+        KeyValueView birthDay;
+        @BindView(R.id.hireday)
+        KeyValueView hireday;
+        @BindView(R.id.address)
+        KeyValueView address;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);

@@ -2,6 +2,8 @@ package com.rongqi.hua.rongqihua.entity.resp;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 /**
  * Created by dinghu on 2019/8/16.
  */
@@ -32,7 +34,7 @@ public class Developer {
     @SerializedName("sex")
     private boolean sex;
     @SerializedName("workId")
-    private int workId;
+    private String workId;
     @SerializedName("nid")
     private String nid;
     @SerializedName("birth")
@@ -43,6 +45,53 @@ public class Developer {
     private String phone;
     @SerializedName("invCode")
     private String invCode;
+
+    @SerializedName("email")
+    private String email;
+    @SerializedName("place")
+    private String place;
+    @SerializedName("lastTime")
+    private long lastTime;
+
+    public int gettId() {
+        return tId;
+    }
+
+    public void settId(int tId) {
+        this.tId = tId;
+    }
+
+    public String gettUuid() {
+        return tUuid;
+    }
+
+    public void settUuid(String tUuid) {
+        this.tUuid = tUuid;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public long getLastTime() {
+        return lastTime;
+    }
+
+    public void setLastTime(long lastTime) {
+        this.lastTime = lastTime;
+    }
 
     public int getTId() {
         return tId;
@@ -84,11 +133,11 @@ public class Developer {
         this.sex = sex;
     }
 
-    public int getWorkId() {
+    public String getWorkId() {
         return workId;
     }
 
-    public void setWorkId(int workId) {
+    public void setWorkId(String workId) {
         this.workId = workId;
     }
 

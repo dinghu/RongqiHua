@@ -15,22 +15,17 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.List;
 
-public abstract class RefreshLoadListViewFragment<T,ViewHolder> extends RefreshLoadFragment<T> {
+public abstract class RefreshLoadListViewFragment<T, ViewHolder> extends RefreshLoadFragment<T> {
     private AbsListView listView;
     private BaseListAdapter adapter;
     private int itemLayout;
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_refresh_load_common, null);
-        return view;
-    }
+    public abstract int getItemLayout();
 
-    public void bindView(SmartRefreshLayout smartRefreshLayout, AbsListView listView, List<T> mData, int itemLayout) {
+    public void bindView(SmartRefreshLayout smartRefreshLayout, AbsListView listView, List<T> mData) {
         super.bindView(smartRefreshLayout, mData);
         this.listView = listView;
-        this.itemLayout = itemLayout;
+        this.itemLayout = getItemLayout();
         adapter = new RefreshLoadListViewFragment.ListAdapter(getContext(), mData);
         this.listView.setAdapter(this.adapter);
     }
@@ -59,7 +54,7 @@ public abstract class RefreshLoadListViewFragment<T,ViewHolder> extends RefreshL
     public abstract void initializeViews(int position, T t, ViewHolder holder);
 
 
-    private class ListAdapter extends BaseListAdapter<T,ViewHolder> {
+    private class ListAdapter extends BaseListAdapter<T, ViewHolder> {
 
         public ListAdapter(Context context, List<T> list) {
             super(list, context);

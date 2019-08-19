@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/kvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvitemPadding="5sp"
+            app:kvkey="姓名:"
+            app:kvkeyTextSize="12sp"
+            app:kvkeyvalueSpace="1dp"
+            app:kvvalueGravity="left"
+            app:kvvalueTextSize="12sp"
+            tools:kvvalue="招生老师姓名" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/sex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvitemPadding="5sp"
+            app:kvkey="性别:"
+            app:kvkeyTextSize="12sp"
+            app:kvkeyvalueSpace="1dp"
+            app:kvvalueGravity="left"
+            app:kvvalueTextSize="12sp"
+            tools:kvvalue="女" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/shenfenCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvitemPadding="5sp"
+            app:kvkey="身份证号码:"
+            app:kvkeyTextSize="12sp"
+            app:kvkeyvalueSpace="1dp"
+            app:kvvalueGravity="left"
+            app:kvvalueTextSize="12sp"
+            tools:kvvalue="" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvitemPadding="5sp"
+            app:kvkey="电话号码:"
+            app:kvkeyTextSize="12sp"
+            app:kvkeyvalueSpace="1dp"
+            app:kvvalueGravity="left"
+            app:kvvalueTextSize="12sp"
+            tools:kvvalue="1111111" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/shenfenType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvitemPadding="5sp"
+            app:kvkey="身份类型:"
+            app:kvkeyTextSize="12sp"
+            app:kvkeyvalueSpace="1dp"
+            app:kvvalueGravity="left"
+            app:kvvalueTextSize="12sp"
+            tools:kvvalue="学生" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/zuanye"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvitemPadding="5sp"
+            app:kvkey="专业:"
+            app:kvkeyTextSize="12sp"
+            app:kvkeyvalueSpace="1dp"
+            app:kvvalueGravity="left"
+            app:kvvalueTextSize="12sp"
+            tools:kvvalue="计算机" />
+
+        <com.fkh.support.ui.widget.KeyValueView
+            android:id="@+id/yuanxiao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:kvitemPadding="5sp"
+            app:kvkey="毕业院校:"
+            app:kvkeyTextSize="12sp"
+            app:kvkeyvalueSpace="1dp"
+            app:kvvalueGravity="left"
+            app:kvvalueTextSize="12sp"
+            tools:kvvalue="1986/1/1" />
+    </LinearLayout>
+</LinearLayout>

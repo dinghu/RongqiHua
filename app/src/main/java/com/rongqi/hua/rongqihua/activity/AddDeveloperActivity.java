@@ -11,7 +11,6 @@ import com.rongqi.hua.rongqihua.R;
 import com.rongqi.hua.rongqihua.base.RqBaseActivity;
 import com.rongqi.hua.rongqihua.entity.resp.BaseResp;
 import com.rongqi.hua.rongqihua.entity.resp.Developer;
-import com.rongqi.hua.rongqihua.entity.resp.NewsItem;
 import com.rongqi.hua.rongqihua.uitls.UserUtils;
 
 import java.util.List;
@@ -46,6 +45,7 @@ public class AddDeveloperActivity extends RqBaseActivity {
                     @Override
                     public void onSuccess(BaseResp baseResp) {
                         hideLoading();
+                        setResult(RESULT_OK);
                         ToastUtils.showLong(baseResp.message);
                     }
 
@@ -69,7 +69,7 @@ public class AddDeveloperActivity extends RqBaseActivity {
                     String developers = responseBody.string();
                     List<Developer> developerList = GsonUtils.fromJson(developers, new TypeToken<List<Developer>>() {
                     }.getType());
-                    if (developerList != null && !developers.isEmpty()) {
+                    if (developerList != null && !developerList.isEmpty()) {
                         doAdd();
                     } else {
                         hideLoading();

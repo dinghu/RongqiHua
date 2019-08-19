@@ -1,20 +1,28 @@
 package com.rongqi.hua.rongqihua.activity;
 
+import android.os.Bundle;
+import android.view.View;
+
 import com.blankj.utilcode.util.TimeUtils;
 import com.fkh.support.ui.widget.KeyValueListView;
 import com.fkh.support.ui.widget.KeyValueView;
+import com.fkh.support.ui.widget.TitleView;
 import com.rongqi.hua.rongqihua.R;
 import com.rongqi.hua.rongqihua.base.RqBaseActivity;
 import com.rongqi.hua.rongqihua.entity.resp.TUserInfo;
+import com.rongqi.hua.rongqihua.uitls.ActivityUtils;
 import com.rongqi.hua.rongqihua.uitls.UserUtils;
 
 import java.util.LinkedHashMap;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MyRegisInfoDetailActivity extends RqBaseActivity {
     @BindView(R.id.keyValueListView)
     KeyValueListView keyValueListView;
+    @BindView(R.id.titleView)
+    TitleView titleView;
 
     @Override
     protected int getLayout() {
@@ -23,6 +31,12 @@ public class MyRegisInfoDetailActivity extends RqBaseActivity {
 
     @Override
     protected void initView() {
+        titleView.setOnClickRightListener(new TitleView.OnClickRightListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityUtils.startActivity(MyRegisInfoDetailActivity.this, ModifyRegistInfoActivity.class);
+            }
+        });
 
         TUserInfo userInfo = UserUtils.getUserInfo();
         LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<>();
@@ -31,7 +45,7 @@ public class MyRegisInfoDetailActivity extends RqBaseActivity {
         linkedHashMap.put("性别", userInfo.sex ? "男" : "女");
 //        linkedHashMap.put("工号",userInfo.hiredate);
         linkedHashMap.put("身份证号", userInfo.nid);
-        linkedHashMap.put("出生年月",TimeUtils.millis2String(userInfo.birth));
+        linkedHashMap.put("出生年月", TimeUtils.millis2String(userInfo.birth));
         linkedHashMap.put("入职日期", TimeUtils.millis2String(userInfo.hiredate));
         linkedHashMap.put("联系电话", userInfo.phone);
         linkedHashMap.put("联系邮箱", userInfo.email);
