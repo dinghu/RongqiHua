@@ -33,9 +33,13 @@ import com.rongqi.hua.rongqihua.entity.resp.NewsItem;
 import com.rongqi.hua.rongqihua.uitls.ActivityUtils;
 import com.rongqi.hua.rongqihua.uitls.UserUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -107,6 +111,13 @@ public class HomeFragment extends RqBaseFragment {
         });
     }
 
+    private String data2String(String dateString) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'CST' yyyy", Locale.US);
+        Date date = TimeUtils.string2Date(dateString, simpleDateFormat);
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return TimeUtils.date2String(date, simpleDateFormat1);
+    }
+
     @Override
     protected void initView(View view) {
         bannerList.add(R.drawable.swiper1);
@@ -119,7 +130,7 @@ public class HomeFragment extends RqBaseFragment {
                 getData();
             }
         });
-
+        newsList.setFocusable(false);
 
         newsList.setAdapter(newsAdapter = new BaseListAdapter<NewsItem, ViewHolder>(news, getContext()) {
             @Override
@@ -134,10 +145,19 @@ public class HomeFragment extends RqBaseFragment {
 
             @Override
             public void initializeViews(int position, NewsItem s, ViewHolder viewHolder) {
-                String displayString = s.getTeacherName() + " 在 " +
-                        TimeUtils.date2String(new Date(s.getInsertDate())) +
-                        (s.getType() == 2 ? " 成功" : " 失败") + "发展 " + s.getStudentName()
-                        + " 合伙人";
+                String displayString = "";
+
+                if (s.getType() == 2) {
+                    displayString = s.getTeacherName() + " 在 " +
+                            data2String(s.getInsertDate()) + (TextUtils.isEmpty(s.getStudentName()) ?
+                            " 失败发展 " : " 成功发展 ") + s.getStudentName()
+                            + " 合伙人";
+                } else {
+                    displayString = s.getTeacherName() + " 在 " +
+                            data2String(s.getInsertDate()) + (TextUtils.isEmpty(s.getStudentName()) ?
+                            " 失败招收 " : " 成功招收 ") + s.getStudentName()
+                            + " 学生";
+                }
                 viewHolder.content.setText(displayString);
             }
         });
@@ -200,7 +220,7 @@ public class HomeFragment extends RqBaseFragment {
         convenientBanner.setCanLoop(true);
     }
 
-    @OnClick({R.id.company_setting, R.id.company_info, R.id.company_bindweichat,R.id.company_members})
+    @OnClick({R.id.company_setting, R.id.company_info, R.id.company_bindweichat, R.id.company_members})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.company_members:

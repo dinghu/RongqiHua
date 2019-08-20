@@ -34,8 +34,9 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:hint="请输入您的真实姓名"
                 android:id="@+id/tvName"
-                style="@style/EditTextStyle"/>
+                style="@style/EditTextStyle" />
         </LinearLayout>
 
         <LinearLayout
@@ -64,6 +65,7 @@
                     android:id="@+id/boy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:text="男" />
 
                 <RadioButton
@@ -93,6 +95,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:hint="请选择日期"
                 android:id="@+id/tvBirthDay"
                 style="@style/EditTextStyle" />
         </LinearLayout>
@@ -115,6 +118,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:hint="请选择日期"
                 android:id="@+id/workStart"
                 style="@style/EditTextStyle" />
         </LinearLayout>
@@ -137,6 +141,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:hint="请输入身份证号码"
                 android:id="@+id/shenfenCode"
                 style="@style/EditTextStyle" />
         </LinearLayout>
@@ -158,6 +163,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:hint="请输入联系电话"
                 android:id="@+id/telphone"
                 style="@style/EditTextStyle" />
         </LinearLayout>
@@ -179,6 +185,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:hint="请输入邮箱"
                 android:id="@+id/mail"
                 style="@style/EditTextStyle" />
         </LinearLayout>
@@ -200,8 +207,9 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:hint="请输入现住地址"
                 android:id="@+id/address"
-                style="@style/EditTextStyle"/>
+                style="@style/EditTextStyle" />
         </LinearLayout>
 
         <LinearLayout
@@ -222,6 +230,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:hint="请输入邀请码"
                 android:id="@+id/joinCode"
                 style="@style/EditTextStyle" />
         </LinearLayout>

@@ -1,5 +1,6 @@
 package com.rongqi.hua.rongqihua.activity;
 
+import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -23,6 +24,8 @@ public class RegistActivity extends RqBaseActivity {
     EditText accountValue;
     @BindView(R.id.password_value)
     EditText passwordValue;
+    @BindView(R.id.password_value_two)
+    EditText password_value_two;
     @BindView(R.id.next)
     TextView next;
 
@@ -40,6 +43,26 @@ public class RegistActivity extends RqBaseActivity {
         showLoading();
         String account = accountValue.getText().toString();
         String password = passwordValue.getText().toString();
+        String passwordValueTwo = password_value_two.getText().toString();
+        if (TextUtils.isEmpty(account)) {
+            accountValue.setError(accountValue.getHint());
+            accountValue.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            passwordValue.setError(passwordValue.getHint());
+            passwordValue.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(passwordValueTwo)) {
+            password_value_two.setError(password_value_two.getHint());
+            password_value_two.requestFocus();
+            return;
+        }
+        if (passwordValueTwo.equals(password)) {
+            ToastUtils.showLong("两次输入的密码不相同");
+            return;
+        }
         RetrofitHelper.sendRequest(apiService.adminInsert(new AccountReq(account, password)), new ResponseListener<BaseResp>() {
             @Override
             public void onSuccess(BaseResp baseResp) {

@@ -11,6 +11,7 @@ import com.rongqi.hua.rongqihua.R;
 import com.rongqi.hua.rongqihua.base.RqBaseActivity;
 import com.rongqi.hua.rongqihua.entity.resp.BaseResp;
 import com.rongqi.hua.rongqihua.entity.resp.Developer;
+import com.rongqi.hua.rongqihua.uitls.CommonUtils;
 import com.rongqi.hua.rongqihua.uitls.UserUtils;
 
 import java.util.List;
@@ -62,6 +63,13 @@ public class AddDeveloperActivity extends RqBaseActivity {
     public void onViewClicked() {
 
         String name = tvName.getText().toString();
+        if (!CommonUtils.checkInput(tvName)) {
+            return;
+        }
+
+        if (!CommonUtils.checkInput(shenfenCode)) {
+            return;
+        }
         showLoading();
         RetrofitHelper.sendRequest(apiService.searchDeveloperByName(name), new ResponseListener<ResponseBody>() {
             @Override

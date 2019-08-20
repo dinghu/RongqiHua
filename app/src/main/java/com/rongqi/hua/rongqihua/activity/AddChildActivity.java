@@ -1,6 +1,8 @@
 package com.rongqi.hua.rongqihua.activity;
 
 import android.text.TextUtils;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -17,6 +19,7 @@ import com.rongqi.hua.rongqihua.base.RqBaseActivity;
 import com.rongqi.hua.rongqihua.entity.resp.BaseResp;
 import com.rongqi.hua.rongqihua.entity.resp.Child;
 import com.rongqi.hua.rongqihua.entity.resp.PerType;
+import com.rongqi.hua.rongqihua.uitls.CommonUtils;
 import com.rongqi.hua.rongqihua.uitls.GsonUtils;
 import com.rongqi.hua.rongqihua.uitls.UserUtils;
 
@@ -60,11 +63,35 @@ public class AddChildActivity extends RqBaseActivity {
 
     @Override
     protected void initView() {
-
+        shenfenType.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                shenfenType.requestFocus();
+                return false;
+            }
+        });
     }
 
     @OnClick(R.id.reserveBtn)
     public void onViewClicked() {
+
+        if (!CommonUtils.checkInput(tvName)) {
+            return;
+        }
+
+        if (!CommonUtils.checkInput(shenfenCode)) {
+            return;
+        }
+
+        if (!CommonUtils.checkInput(tel)) {
+            return;
+        }
+        if (!CommonUtils.checkInput(zhuanye)) {
+            return;
+        }
+        if (!CommonUtils.checkInput(school)) {
+            return;
+        }
         String name = tvName.getText().toString();
         String nid = shenfenCode.getText().toString();
         Child child = new Child();
@@ -105,8 +132,15 @@ public class AddChildActivity extends RqBaseActivity {
                         if (!TextUtils.isEmpty(tps)) {
                             final List<PerType> perTypes = GsonUtils.fromJson(tps, new TypeToken<List<PerType>>() {
                             }.getType());
+
                             AddChildActivity.this.perTypes.clear();
-                            AddChildActivity.this.perTypes.addAll(perTypes);
+                            for (PerType perType : perTypes) {
+                                if (perType.getId() == 2 && "合伙人".equals(perType.getName())) {
+
+                                } else {
+                                    AddChildActivity.this.perTypes.add(perType);
+                                }
+                            }
 
                             ListSelectDialog<PerType> listSelectDialog = new ListSelectDialog<PerType>(AddChildActivity.this
                                     , AddChildActivity.this.perTypes, new ListSelectDialog.OnItemSelectListener<PerType>() {

@@ -1,6 +1,8 @@
 package com.rongqi.hua.rongqihua.activity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +25,7 @@ import com.rongqi.hua.rongqihua.base.RqBaseActivity;
 import com.rongqi.hua.rongqihua.entity.req.RegistInfoReq;
 import com.rongqi.hua.rongqihua.entity.resp.DataResp;
 import com.rongqi.hua.rongqihua.entity.resp.TUserInfo;
+import com.rongqi.hua.rongqihua.uitls.CommonUtils;
 import com.rongqi.hua.rongqihua.uitls.UserUtils;
 
 import java.util.Date;
@@ -76,10 +79,42 @@ public class RegisInfotActivity extends RqBaseActivity {
 
     @Override
     protected void initView() {
-
+        workStart.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                workStart.requestFocus();
+                return false;
+            }
+        });
+        tvBirthDay.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                tvBirthDay.requestFocus();
+                return false;
+            }
+        });
     }
 
-    protected void onSubmit(){
+    protected void onSubmit() {
+        if (!CommonUtils.checkInput(joinCode)) {
+            return;
+        }
+        if (!CommonUtils.checkInput(tvName)) {
+            return;
+        }
+        if (!CommonUtils.checkInput(mail)) {
+            return;
+        }
+        if (!CommonUtils.checkInput(telphone)) {
+            return;
+        }
+        if (!CommonUtils.checkInput(address)) {
+            return;
+        }
+        if (!CommonUtils.checkInput(shenfenCode)) {
+            return;
+        }
+
         String invCode = joinCode.getText().toString();
         RegistInfoReq registInfoReq = new RegistInfoReq();
         registInfoReq.name = tvName.getText().toString();
@@ -94,6 +129,8 @@ public class RegisInfotActivity extends RqBaseActivity {
         registInfoReq.place = address.getText().toString();
         registInfoReq.tUuid = UserUtils.getToken();
         registInfoReq.nid = shenfenCode.getText().toString();
+
+
         showLoading();
         RetrofitHelper.sendRequest(apiService.teacherInsert(invCode, registInfoReq), new ResponseListener<DataResp<TUserInfo>>() {
             @Override
@@ -119,7 +156,7 @@ public class RegisInfotActivity extends RqBaseActivity {
             case R.id.tvBirthDay:
                 DatePickDialog dialog = new DatePickDialog(this);
                 //设置上下年分限制
-                dialog.setYearLimt(5);
+                dialog.setYearLimt(100);
                 //设置标题
                 dialog.setTitle("选择时间");
                 //设置类型
@@ -127,12 +164,12 @@ public class RegisInfotActivity extends RqBaseActivity {
                 //设置消息体的显示格式，日期格式
                 dialog.setMessageFormat("yyyy-MM-dd HH:mm");
                 //设置选择回调
-                dialog.setOnChangeLisener(new OnChangeLisener() {
-                    @Override
-                    public void onChanged(Date date) {
-                        tvBirthDay.setText(TimeUtils.date2String(date, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
-                    }
-                });
+//                dialog.setOnChangeLisener(new OnChangeLisener() {
+//                    @Override
+//                    public void onChanged(Date date) {
+//                        tvBirthDay.setText(TimeUtils.date2String(date, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
+//                    }
+//                });
                 //设置点击确定按钮回调
                 dialog.setOnSureLisener(new OnSureLisener() {
                     @Override
@@ -145,7 +182,7 @@ public class RegisInfotActivity extends RqBaseActivity {
             case R.id.workStart:
                 DatePickDialog dialogStart = new DatePickDialog(this);
                 //设置上下年分限制
-                dialogStart.setYearLimt(5);
+                dialogStart.setYearLimt(100);
                 //设置标题
                 dialogStart.setTitle("选择时间");
                 //设置类型
@@ -153,12 +190,12 @@ public class RegisInfotActivity extends RqBaseActivity {
                 //设置消息体的显示格式，日期格式
                 dialogStart.setMessageFormat("yyyy-MM-dd HH:mm");
                 //设置选择回调
-                dialogStart.setOnChangeLisener(new OnChangeLisener() {
-                    @Override
-                    public void onChanged(Date date) {
-                        workStart.setText(TimeUtils.date2String(date, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
-                    }
-                });
+//                dialogStart.setOnChangeLisener(new OnChangeLisener() {
+//                    @Override
+//                    public void onChanged(Date date) {
+//                        workStart.setText(TimeUtils.date2String(date, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
+//                    }
+//                });
                 //设置点击确定按钮回调
                 dialogStart.setOnSureLisener(new OnSureLisener() {
                     @Override

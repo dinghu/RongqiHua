@@ -32,6 +32,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:hint="请输入学生的姓名"
                 android:id="@+id/tvName"
                 style="@style/EditTextStyle" />
         </LinearLayout>
@@ -60,6 +61,7 @@
 
                 <RadioButton
                     android:id="@+id/boy"
+                    android:checked="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="男" />
@@ -90,6 +92,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:hint="请输入身份证号码"
                 android:id="@+id/shenfenCode"
                 style="@style/EditTextStyle" />
         </LinearLayout>
@@ -111,6 +114,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:hint="请输入联系电话"
                 android:id="@+id/tel"
                 style="@style/EditTextStyle" />
         </LinearLayout>
@@ -132,6 +136,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:hint="请选择身份类型"
                 android:id="@+id/shenfenType"
                 style="@style/EditTextStyle"
                 android:focusableInTouchMode="true" />
@@ -154,6 +159,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:hint="请输入报选专业"
                 android:id="@+id/zhuanye"
                 style="@style/EditTextStyle" />
         </LinearLayout>
@@ -175,6 +181,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:hint="请输入毕业院校"
                 android:id="@+id/school"
                 style="@style/EditTextStyle" />
         </LinearLayout>
