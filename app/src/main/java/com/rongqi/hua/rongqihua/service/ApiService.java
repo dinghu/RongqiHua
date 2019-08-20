@@ -72,5 +72,5 @@ public interface ApiService {
     Call<ResponseBody> perType();
 
     @POST("student/selectAllByTid")
-    Call<ResponseBody> selectAllChildByTid(@Query("uuid") String uuid);
+    Call<ResponseBody> selectAllChildByTid(@Query("uuId") String uuid);
 }
