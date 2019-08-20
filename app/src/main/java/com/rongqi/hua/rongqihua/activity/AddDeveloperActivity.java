@@ -47,6 +47,7 @@ public class AddDeveloperActivity extends RqBaseActivity {
                         hideLoading();
                         setResult(RESULT_OK);
                         ToastUtils.showLong(baseResp.message);
+                        finish();
                     }
 
                     @Override
