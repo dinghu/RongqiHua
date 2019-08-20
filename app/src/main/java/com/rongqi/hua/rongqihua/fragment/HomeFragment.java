@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
@@ -62,7 +63,7 @@ public class HomeFragment extends RqBaseFragment {
     @BindView(R.id.company_bindweichat)
     LinearLayout companyBindweichat;
     @BindView(R.id.newsList)
-    ScrollListView newsList;
+    ListView newsList;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
     BaseListAdapter newsAdapter;
