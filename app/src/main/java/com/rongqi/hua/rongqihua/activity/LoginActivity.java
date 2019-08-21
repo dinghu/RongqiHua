@@ -1,7 +1,6 @@
 package com.rongqi.hua.rongqihua.activity;
 
 import android.content.Intent;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,9 +14,11 @@ import com.rongqi.hua.rongqihua.base.RqBaseActivity;
 import com.rongqi.hua.rongqihua.entity.req.AccountReq;
 import com.rongqi.hua.rongqihua.entity.req.UserLoginReq;
 import com.rongqi.hua.rongqihua.entity.resp.BaseResp;
-import com.rongqi.hua.rongqihua.entity.resp.DataResp;
 import com.rongqi.hua.rongqihua.entity.resp.LoginResp;
+import com.rongqi.hua.rongqihua.uitls.GsonUtils;
 import com.rongqi.hua.rongqihua.uitls.UserUtils;
+
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -36,6 +37,8 @@ public class LoginActivity extends RqBaseActivity {
     @BindView(R.id.regist)
     TextView regist;
 
+    public static boolean needRefresh = false;
+
     @Override
     protected int getLayout() {
         return R.layout.activity_user_login;
@@ -46,7 +49,7 @@ public class LoginActivity extends RqBaseActivity {
 
     }
 
-    public void onLoginSuc(){
+    public void onLoginSuc() {
 
     }
 
@@ -63,6 +66,7 @@ public class LoginActivity extends RqBaseActivity {
                 hideLoading();
                 try {
                     if ("true".equals(baseResp.string())) {
+                        needRefresh = true;
                         ToastUtils.showLong("登录成功");
                         UserUtils.saveAccount(account);
                         UserUtils.saveToken(uuid);
@@ -87,21 +91,39 @@ public class LoginActivity extends RqBaseActivity {
         showLoading();
         final String account = accountValue.getText().toString();
         String password = passwordValue.getText().toString();
-        RetrofitHelper.sendRequest(apiService.login(new AccountReq(account, password)), new ResponseListener<LoginResp>() {
+        RetrofitHelper.sendRequest(apiService.login(new AccountReq(account, password)), new ResponseListener<ResponseBody>() {
             @Override
-            public void onSuccess(LoginResp baseResp) {
-                LoginResp.UuidBean uuidBean = baseResp.data;
-                if (!uuidBean.isUserLog()) {
-                    //继续授权
-                    userAccept(baseResp.data.getUuid());
-                }
-                if (uuidBean.isUserLog() && uuidBean.gettUserInfo() != null) {
-                    hideLoading();
-                    //已经注册了信息
-                    UserUtils.saveUserInfo(uuidBean.gettUserInfo());
-                    UserUtils.saveAccount(account);
-                    UserUtils.saveToken(uuidBean.getUuid());
-                    finish();
+            public void onSuccess(ResponseBody baseResp) {
+                try {
+                    String json = baseResp.string();
+                    JSONObject jsonObject = new JSONObject(json);
+                    if (jsonObject.has("data")) {
+                        Object o = jsonObject.get("data");
+                        if (o instanceof Boolean) {
+                            hideLoading();
+                            BaseResp loginResp = GsonUtils.fromJson(json, BaseResp.class);
+                            ToastUtils.showLong(loginResp.message);
+                        } else {
+                            LoginResp loginResp = GsonUtils.fromJson(json, LoginResp.class);
+                            LoginResp.UuidBean uuidBean = loginResp.data;
+                            if (!uuidBean.isUserLog()) {
+                                //继续授权
+                                userAccept(uuidBean.getUuid());
+                            }
+                            if (uuidBean.isUserLog() && uuidBean.gettUserInfo() != null) {
+                                hideLoading();
+                                needRefresh = true;
+                                //已经注册了信息
+                                UserUtils.saveUserInfo(uuidBean.gettUserInfo());
+                                UserUtils.saveAccount(account);
+                                UserUtils.saveToken(uuidBean.getUuid());
+                                finish();
+                            }
+                        }
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
 

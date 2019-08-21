@@ -23,7 +23,7 @@ public interface ApiService {
     Call<BaseResp> adminInsert(@Body AccountReq accountReq);
 
     @POST("admin/selectByAdmin")
-    Call<LoginResp> login(@Body AccountReq accountReq);
+    Call<ResponseBody> login(@Body AccountReq accountReq);
 
     //1.新增合伙人
     @POST("teacher/insert")

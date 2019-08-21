@@ -17,6 +17,7 @@ import com.fkh.support.ui.fragment.RefreshLoadListViewFragment;
 import com.fkh.support.ui.widget.KeyValueView;
 import com.google.gson.reflect.TypeToken;
 import com.rongqi.hua.rongqihua.R;
+import com.rongqi.hua.rongqihua.activity.LoginActivity;
 import com.rongqi.hua.rongqihua.entity.resp.YejiTotal;
 import com.rongqi.hua.rongqihua.service.ApiService;
 import com.rongqi.hua.rongqihua.uitls.GsonUtils;
@@ -109,6 +110,15 @@ public class YejiFragment extends RefreshLoadListViewFragment<YejiTotal, YejiFra
                 getAdapter().notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (UserUtils.isLogin() && LoginActivity.needRefresh) {
+            LoginActivity.needRefresh = false;
+            refreshData();
+        }
     }
 
     @Override

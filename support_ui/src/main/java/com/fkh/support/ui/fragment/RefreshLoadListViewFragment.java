@@ -54,6 +54,15 @@ public abstract class RefreshLoadListViewFragment<T, ViewHolder> extends Refresh
     public abstract void initializeViews(int position, T t, ViewHolder holder);
 
 
+    @Override
+    public void refreshData() {
+        //选中第一行
+        if (adapter.getCount() != 0 || (mData != null && !mData.isEmpty())) {
+            listView.setSelection(0);
+        }
+        super.refreshData();
+    }
+
     private class ListAdapter extends BaseListAdapter<T, ViewHolder> {
 
         public ListAdapter(Context context, List<T> list) {

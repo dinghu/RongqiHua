@@ -59,7 +59,7 @@ public class RegistActivity extends RqBaseActivity {
             password_value_two.requestFocus();
             return;
         }
-        if (passwordValueTwo.equals(password)) {
+        if (!passwordValueTwo.equals(password)) {
             ToastUtils.showLong("两次输入的密码不相同");
             return;
         }

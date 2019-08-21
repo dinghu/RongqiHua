@@ -19,7 +19,7 @@ import java.util.List;
 
 public abstract class RefreshLoadFragment<T> extends BaseFragment {
     protected SmartRefreshLayout swipeRefreshLayout;
-    private List<T> mData;
+    protected List<T> mData;
     protected View noData;
     protected int page = 1;
     protected long mLastLoadingTime = 0;
@@ -84,6 +84,20 @@ public abstract class RefreshLoadFragment<T> extends BaseFragment {
                 swipeRefreshLayout.finishLoadMoreWithNoMoreData();
             }
         }
+
+    }
+
+    public void refreshData() {
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                if (noData != null) {
+                    noData.setVisibility(View.GONE);
+                }
+                page = 1;
+                swipeRefreshLayout.autoRefresh();
+            }
+        });
 
     }
 
