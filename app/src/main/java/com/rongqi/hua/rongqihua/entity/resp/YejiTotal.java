@@ -42,7 +42,7 @@ public class YejiTotal {
     @SerializedName("graduate")
     private String graduate;
 
-    private List<?> sub;
+    private List<YejiTotal> sub;
 
     public String getMajor() {
         return major;
@@ -124,11 +124,11 @@ public class YejiTotal {
         this.sup = sup;
     }
 
-    public List<?> getSub() {
+    public List<YejiTotal> getSub() {
         return sub;
     }
 
-    public void setSub(List<?> sub) {
+    public void setSub(List<YejiTotal> sub) {
         this.sub = sub;
     }
 }

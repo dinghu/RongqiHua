@@ -37,10 +37,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingBottom="16dp"
         android:paddingLeft="40dp"
         android:paddingRight="16dp"
-        android:paddingBottom="16dp"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <View
             android:layout_width="match_parent"
@@ -156,4 +157,10 @@
             app:kvvalueTextSize="12sp"
             tools:kvvalue="1986/1/1" />
     </LinearLayout>
+
+    <com.fkh.support.ui.widget.ScrollListView
+        android:id="@+id/subYeji"
+        android:paddingLeft="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

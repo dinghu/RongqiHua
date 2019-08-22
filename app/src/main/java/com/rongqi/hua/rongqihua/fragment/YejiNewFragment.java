@@ -1,30 +1,28 @@
 package com.rongqi.hua.rongqihua.fragment;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.fkh.support.engine.retrofit.ResponseListener;
 import com.fkh.support.engine.retrofit.RetrofitHelper;
 import com.fkh.support.ui.adapter.BaseListAdapter;
-import com.fkh.support.ui.fragment.RefreshLoadListViewFragment;
+import com.fkh.support.ui.fragment.BaseFragment;
 import com.fkh.support.ui.widget.KeyValueView;
 import com.fkh.support.ui.widget.ScrollListView;
 import com.google.gson.reflect.TypeToken;
 import com.rongqi.hua.rongqihua.R;
-import com.rongqi.hua.rongqihua.activity.LoginActivity;
 import com.rongqi.hua.rongqihua.entity.resp.YejiTotal;
 import com.rongqi.hua.rongqihua.service.ApiService;
 import com.rongqi.hua.rongqihua.uitls.GsonUtils;
 import com.rongqi.hua.rongqihua.uitls.UserUtils;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,45 +34,76 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.ResponseBody;
 
-/**
- * Created by dinghu on 2019/8/16.
- */
-public class YejiFragment extends RefreshLoadListViewFragment<YejiTotal, YejiFragment.ViewHolder> {
-
-    ApiService apiService = RetrofitHelper.createService(ApiService.class);
+public class YejiNewFragment extends BaseFragment {
     @BindView(R.id.list)
-    ListView list;
-    @BindView(R.id.smartRefreshLayout)
-    SmartRefreshLayout smartRefreshLayout;
-    @BindView(R.id.noDataView)
-    TextView noDataView;
-
-
+    ScrollListView list;
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout swipeRefreshLayout;
     private ArrayList<YejiTotal> datas = new ArrayList<>();
+
+    BaseAdapter parentAdapter;
+
     private Set<YejiTotal> expandSetParent = new HashSet<>();
     private Set<YejiTotal> expandSetChild = new HashSet<>();
     private HashMap<String, BaseListAdapter> listAdapterHashMap = new HashMap<>();
 
 
+    ApiService apiService = RetrofitHelper.createService(ApiService.class);
+
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_yeji;
+        return R.layout.fragment_yeji_new;
     }
 
     @Override
     protected void initView(View view) {
-        bindView(smartRefreshLayout, list, datas);
-        setNoDataView(noDataView);
-    }
+        list.setAdapter(parentAdapter = new BaseListAdapter<YejiTotal, ViewHolder>(datas, getActivity()) {
+            @Override
+            public int getItemLayout() {
+                return R.layout.item_yeji_total;
+            }
 
-    @Override
-    public int getItemLayout() {
-        return R.layout.item_yeji_total;
-    }
+            @Override
+            public ViewHolder getViewHolder(View convertView) {
+                return new ViewHolder(convertView);
+            }
 
-    @Override
-    public ViewHolder getViewHolder(View convertView) {
-        return new ViewHolder(convertView);
+            @Override
+            public void initializeViews(int position, YejiTotal yejiTotal, ViewHolder viewHolder) {
+                setYejiTotalData(true, yejiTotal, viewHolder);
+
+                BaseListAdapter adapter = listAdapterHashMap.get(position + "");
+                if (adapter == null) {
+                    adapter = new BaseListAdapter<YejiTotal, ViewHolder>(yejiTotal.getSub(), getContext()) {
+                        @Override
+                        public int getItemLayout() {
+                            return R.layout.item_yeji_total;
+                        }
+
+                        @Override
+                        public ViewHolder getViewHolder(View convertView) {
+                            return new ViewHolder(convertView);
+                        }
+
+                        @Override
+                        public void initializeViews(int position, YejiTotal yejiTotal, ViewHolder viewHolder) {
+                            setYejiTotalData(false, yejiTotal, viewHolder);
+                        }
+                    };
+                    //子业绩
+                    viewHolder.subYeji.setAdapter(adapter);
+                } else {
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(true);
+                getData();
+            }
+        });
     }
 
     private void setYejiTotalData(final boolean isParent, final YejiTotal yejiTotal, final ViewHolder viewHolder) {
@@ -113,60 +142,24 @@ public class YejiFragment extends RefreshLoadListViewFragment<YejiTotal, YejiFra
                 } else {
                     expandSet.add(yejiTotal);
                 }
-                getAdapter().notifyDataSetChanged();
+                parentAdapter.notifyDataSetChanged();
             }
         });
     }
 
-    @Override
-    public void initializeViews(final int position, YejiTotal yejiTotal, final ViewHolder viewHolder) {
-        setYejiTotalData(true, yejiTotal, viewHolder);
-        BaseListAdapter adapter = listAdapterHashMap.get(position + "");
-        if (adapter == null) {
-            adapter = new BaseListAdapter<YejiTotal, ViewHolder>(yejiTotal.getSub(), getContext()) {
-                @Override
-                public int getItemLayout() {
-                    return R.layout.item_yeji_total;
-                }
-
-                @Override
-                public ViewHolder getViewHolder(View convertView) {
-                    return new ViewHolder(convertView);
-                }
-
-                @Override
-                public void initializeViews(int position, YejiTotal yejiTotal, ViewHolder viewHolder) {
-                    setYejiTotalData(false, yejiTotal, viewHolder);
-                }
-            };
-            //子业绩
-            viewHolder.subYeji.setAdapter(adapter);
-        } else {
-            adapter.notifyDataSetChanged();
-        }
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (UserUtils.isLogin() && LoginActivity.needRefresh) {
-            LoginActivity.needRefresh = false;
-            refreshData();
-        }
-    }
-
-    @Override
-    public void getData(int page, boolean isRefreh) {
+    public void getData() {
         RetrofitHelper.sendRequest(apiService.selectAllChildByTid(UserUtils.getToken()), new ResponseListener<ResponseBody>() {
             @Override
             public void onSuccess(ResponseBody baseResp) {
                 try {
+                    swipeRefreshLayout.setRefreshing(false);
                     String body = baseResp.string();
                     if (!TextUtils.isEmpty(body)) {
                         List<YejiTotal> childList = GsonUtils.fromJson(body, new TypeToken<List<YejiTotal>>() {
                         }.getType());
-                        dealDataRecive(childList, true);
+                        datas.clear();
+                        datas.addAll(childList);
+                        parentAdapter.notifyDataSetChanged();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -176,8 +169,8 @@ public class YejiFragment extends RefreshLoadListViewFragment<YejiTotal, YejiFra
 
             @Override
             public void onFail(String code, String message) {
+                swipeRefreshLayout.setRefreshing(false);
                 ToastUtils.showLong(message);
-                dealError(message);
             }
         });
     }
