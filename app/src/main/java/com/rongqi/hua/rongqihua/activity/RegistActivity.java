@@ -11,6 +11,7 @@ import com.rongqi.hua.rongqihua.R;
 import com.rongqi.hua.rongqihua.base.RqBaseActivity;
 import com.rongqi.hua.rongqihua.entity.req.AccountReq;
 import com.rongqi.hua.rongqihua.entity.resp.BaseResp;
+import com.rongqi.hua.rongqihua.entity.resp.BooleanResp;
 import com.rongqi.hua.rongqihua.uitls.ActivityUtils;
 
 import butterknife.BindView;
@@ -63,12 +64,15 @@ public class RegistActivity extends RqBaseActivity {
             ToastUtils.showLong("两次输入的密码不相同");
             return;
         }
-        RetrofitHelper.sendRequest(apiService.adminInsert(new AccountReq(account, password)), new ResponseListener<BaseResp>() {
+        RetrofitHelper.sendRequest(apiService.adminInsert(new AccountReq(account, password)), new ResponseListener<BooleanResp>() {
             @Override
-            public void onSuccess(BaseResp baseResp) {
+            public void onSuccess(BooleanResp baseResp) {
                 hideLoading();
                 ToastUtils.showLong(baseResp.message);
-                ActivityUtils.returnToActivity(RegistActivity.this, LoginActivity.class);
+                if (baseResp.isSuccess()){
+                    ActivityUtils.returnToActivity(RegistActivity.this, LoginActivity.class);
+                }
+
             }
 
             @Override

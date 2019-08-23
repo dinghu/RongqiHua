@@ -9,7 +9,7 @@ import com.fkh.support.engine.retrofit.RetrofitHelper;
 import com.google.gson.reflect.TypeToken;
 import com.rongqi.hua.rongqihua.R;
 import com.rongqi.hua.rongqihua.base.RqBaseActivity;
-import com.rongqi.hua.rongqihua.entity.resp.BaseResp;
+import com.rongqi.hua.rongqihua.entity.resp.BooleanResp;
 import com.rongqi.hua.rongqihua.entity.resp.Developer;
 import com.rongqi.hua.rongqihua.uitls.CommonUtils;
 import com.rongqi.hua.rongqihua.uitls.UserUtils;
@@ -42,13 +42,15 @@ public class AddDeveloperActivity extends RqBaseActivity {
     private void doAdd() {//Developer developer
         String shenfenNumber = shenfenCode.getText().toString();
         RetrofitHelper.sendRequest(
-                apiService.relaInsert(shenfenNumber, UserUtils.getToken()), new ResponseListener<BaseResp>() {
+                apiService.relaInsert(shenfenNumber, UserUtils.getToken()), new ResponseListener<BooleanResp>() {
                     @Override
-                    public void onSuccess(BaseResp baseResp) {
+                    public void onSuccess(BooleanResp baseResp) {
                         hideLoading();
-                        setResult(RESULT_OK);
                         ToastUtils.showLong(baseResp.message);
-                        finish();
+                        if (baseResp.isSuccess()){
+                            setResult(RESULT_OK);
+                            finish();
+                        }
                     }
 
                     @Override

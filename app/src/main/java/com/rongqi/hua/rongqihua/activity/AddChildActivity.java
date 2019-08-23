@@ -17,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import com.rongqi.hua.rongqihua.R;
 import com.rongqi.hua.rongqihua.base.RqBaseActivity;
 import com.rongqi.hua.rongqihua.entity.resp.BaseResp;
+import com.rongqi.hua.rongqihua.entity.resp.BooleanResp;
 import com.rongqi.hua.rongqihua.entity.resp.Child;
 import com.rongqi.hua.rongqihua.entity.resp.PerType;
 import com.rongqi.hua.rongqihua.uitls.CommonUtils;
@@ -103,13 +104,15 @@ public class AddChildActivity extends RqBaseActivity {
         child.setGraduate(school.getText().toString());
         child.setSId(0);
         showLoading();
-        RetrofitHelper.sendRequest(apiService.studentInsert(typeId, UserUtils.getToken(), child), new ResponseListener<BaseResp>() {
+        RetrofitHelper.sendRequest(apiService.studentInsert(typeId, UserUtils.getToken(), child), new ResponseListener<BooleanResp>() {
             @Override
-            public void onSuccess(BaseResp responseBody) {
+            public void onSuccess(BooleanResp responseBody) {
                 hideLoading();
-                setResult(RESULT_OK);
                 ToastUtils.showLong(responseBody.message);
-                finish();
+                if (responseBody.isSuccess()) {
+                    setResult(RESULT_OK);
+                    finish();
+                }
             }
 
             @Override
