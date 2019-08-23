@@ -1,1 +1,1 @@
-include ':app', ':support_ui', ':support_engine'
+include ':app', ':support_ui', ':support_engine', ':recyclertreeview-lib'

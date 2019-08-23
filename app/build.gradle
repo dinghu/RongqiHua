@@ -33,4 +33,5 @@ dependencies {
     implementation project(':support_engine')
     implementation project(':support_ui')
     implementation 'com.github.codbking:PickTime:v1.0.1'
+    implementation project(':recyclertreeview-lib')
 }

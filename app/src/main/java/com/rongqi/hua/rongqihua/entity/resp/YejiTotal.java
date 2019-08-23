@@ -1,13 +1,16 @@
 package com.rongqi.hua.rongqihua.entity.resp;
 
 import com.google.gson.annotations.SerializedName;
+import com.rongqi.hua.rongqihua.R;
 
 import java.util.List;
+
+import tellh.com.recyclertreeview_lib.LayoutItemType;
 
 /**
  * Created by dinghu on 2019/8/20.
  */
-public class YejiTotal {
+public class YejiTotal implements LayoutItemType {
 
     /**
      * sub : []
@@ -130,5 +133,10 @@ public class YejiTotal {
 
     public void setSub(List<YejiTotal> sub) {
         this.sub = sub;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.item_yeji_total;
     }
 }
