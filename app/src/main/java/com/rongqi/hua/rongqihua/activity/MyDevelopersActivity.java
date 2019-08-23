@@ -79,8 +79,14 @@ public class MyDevelopersActivity extends RefreshLoadListViewActivity<Developer,
                     String bodyString = body.string();
                     List<Developer> developers = GsonUtils.fromJson(bodyString, new TypeToken<List<Developer>>() {
                     }.getType());
-                    number.setText("共" + (developers != null ? developers.size() : 0) + "人");
-                    dealDataRecive(developers, true);
+                    List<Developer> developersTar = new ArrayList<>();
+                    for (Developer developer : developers) {
+                        if (developer != null) {
+                            developersTar.add(developer);
+                        }
+                    }
+                    number.setText("共" + (developersTar != null ? developersTar.size() : 0) + "人");
+                    dealDataRecive(developersTar, true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
