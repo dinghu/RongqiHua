@@ -111,7 +111,7 @@ public class YejiNew2 extends BaseFragment {
                         datas.clear();
                         datas.addAll(childList);
                         setData(datas);
-                        adapter.notifyDataSetChanged();
+                        adapter.refresh(nodes);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
