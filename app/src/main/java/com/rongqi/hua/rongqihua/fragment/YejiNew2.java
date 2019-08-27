@@ -1,5 +1,6 @@
 package com.rongqi.hua.rongqihua.fragment;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -35,6 +36,9 @@ import tellh.com.recyclertreeview_lib.TreeViewAdapter;
 public class YejiNew2 extends BaseFragment {
     @BindView(R.id.rv)
     RecyclerView rv;
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout swipeRefreshLayout;
+
 
     ApiService apiService = RetrofitHelper.createService(ApiService.class);
 
@@ -57,6 +61,7 @@ public class YejiNew2 extends BaseFragment {
         RetrofitHelper.sendRequest(apiService.selectAllChildByTid(UserUtils.getToken()), new ResponseListener<ResponseBody>() {
             @Override
             public void onSuccess(ResponseBody baseResp) {
+                swipeRefreshLayout.setRefreshing(false);
                 try {
                     String body = baseResp.string();
                     if (!TextUtils.isEmpty(body)) {
@@ -74,6 +79,7 @@ public class YejiNew2 extends BaseFragment {
 
             @Override
             public void onFail(String code, String message) {
+                swipeRefreshLayout.setRefreshing(false);
                 ToastUtils.showLong(message);
             }
         });
@@ -102,7 +108,12 @@ public class YejiNew2 extends BaseFragment {
 
             setLevelNodes(firstLevel, yejiTotal.getSub());
         }
-
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData();
+            }
+        });
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new TreeViewAdapter(nodes, Arrays.asList(new YejiNodeBinder()));
         adapter.setPadding(SizeUtils.dp2px(16));
@@ -130,5 +141,12 @@ public class YejiNew2 extends BaseFragment {
             }
         });
         rv.setAdapter(adapter);
+        swipeRefreshLayout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(true);
+                getData();
+            }
+        }, 100);
     }
 }
