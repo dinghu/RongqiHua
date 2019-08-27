@@ -240,9 +240,17 @@ public class HomeFragment extends RqBaseFragment {
 
                 break;
             case R.id.company_bindweichat:
+                if (!UserUtils.isLogin()) {
+                    UserUtils.reqLogin(getContext());
+                    return;
+                }
                 ActivityUtils.startActivity(getContext(), MyDevelopersActivity.class);
                 break;
             case R.id.company_info:
+                if (!UserUtils.isLogin()) {
+                    UserUtils.reqLogin(getContext());
+                    return;
+                }
                 ActivityUtils.startActivity(getContext(), MyChidrensAvtivity.class);
                 break;
         }

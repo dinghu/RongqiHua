@@ -15,6 +15,7 @@ import com.fkh.support.engine.retrofit.RetrofitHelper;
 import com.fkh.support.ui.fragment.BaseFragment;
 import com.google.gson.reflect.TypeToken;
 import com.rongqi.hua.rongqihua.R;
+import com.rongqi.hua.rongqihua.activity.LoginActivity;
 import com.rongqi.hua.rongqihua.entity.resp.YejiTotal;
 import com.rongqi.hua.rongqihua.fragment.yeji.YejiNodeBinder;
 import com.rongqi.hua.rongqihua.service.ApiService;
@@ -95,6 +96,16 @@ public class YejiNew2 extends BaseFragment {
                 getData();
             }
         }, 100);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (UserUtils.isLogin() && LoginActivity.needRefresh) {
+            LoginActivity.needRefresh = false;
+            swipeRefreshLayout.setRefreshing(true);
+            getData();
+        }
     }
 
 

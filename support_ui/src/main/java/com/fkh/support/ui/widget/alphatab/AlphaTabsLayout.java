@@ -148,12 +148,18 @@ public class AlphaTabsLayout extends LinearLayout {
 
         @Override
         public void onClick(View v) {
+            if (null != mListner) {
+                if (mListner.onTabSelected(currentIndex))
+                {
+                    return;
+                }
+            }
             //点击前先重置所有按钮的状态
             resetState();
             mTabViews.get(currentIndex).setIconAlpha(1.0f);
-            if (null != mListner) {
-                mListner.onTabSelected(currentIndex);
-            }
+//            if (null != mListner) {
+//                mListner.onTabSelected(currentIndex);
+//            }
             if (null != mViewPager) {
                 //不能使用平滑滚动，否者颜色改变会乱
                 mViewPager.setCurrentItem(currentIndex, false);

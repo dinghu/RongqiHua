@@ -10,5 +10,5 @@ package com.fkh.support.ui.widget.alphatab;
  * ================================================
  */
 public interface OnTabChangedListner {
-    void onTabSelected(int tabNum);
+    boolean onTabSelected(int tabNum);
 }
