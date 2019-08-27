@@ -39,6 +39,8 @@ public class YejiNew2 extends BaseFragment {
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
 
+    List<TreeNode> nodes = new ArrayList<>();
+
 
     ApiService apiService = RetrofitHelper.createService(ApiService.class);
 
@@ -53,61 +55,6 @@ public class YejiNew2 extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-        getData();
-    }
-
-
-    public void getData() {
-        RetrofitHelper.sendRequest(apiService.selectAllChildByTid(UserUtils.getToken()), new ResponseListener<ResponseBody>() {
-            @Override
-            public void onSuccess(ResponseBody baseResp) {
-                swipeRefreshLayout.setRefreshing(false);
-                try {
-                    String body = baseResp.string();
-                    if (!TextUtils.isEmpty(body)) {
-                        List<YejiTotal> childList = GsonUtils.fromJson(body, new TypeToken<List<YejiTotal>>() {
-                        }.getType());
-                        datas.clear();
-                        datas.addAll(childList);
-                        initData(datas);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFail(String code, String message) {
-                swipeRefreshLayout.setRefreshing(false);
-                ToastUtils.showLong(message);
-            }
-        });
-    }
-
-    private void setLevelNodes(TreeNode<YejiTotal> parentLevel, List<YejiTotal> yejiTotals) {
-        if (yejiTotals != null) {
-            for (YejiTotal yejiTotal : yejiTotals) {
-                TreeNode<YejiTotal> childLevel = new TreeNode(yejiTotal);
-                parentLevel.addChild(childLevel);
-                if (yejiTotal.getSub() != null && !yejiTotal.getSub().isEmpty()) {
-                    setLevelNodes(childLevel, yejiTotal.getSub());
-                }
-            }
-        }
-
-    }
-
-    private void initData(List<YejiTotal> childList) {
-        List<TreeNode> nodes = new ArrayList<>();
-
-
-        for (YejiTotal yejiTotal : childList) {
-            TreeNode<YejiTotal> firstLevel = new TreeNode(yejiTotal);
-            nodes.add(firstLevel);
-
-            setLevelNodes(firstLevel, yejiTotal.getSub());
-        }
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -148,5 +95,57 @@ public class YejiNew2 extends BaseFragment {
                 getData();
             }
         }, 100);
+    }
+
+
+    public void getData() {
+        RetrofitHelper.sendRequest(apiService.selectAllChildByTid(UserUtils.getToken()), new ResponseListener<ResponseBody>() {
+            @Override
+            public void onSuccess(ResponseBody baseResp) {
+                swipeRefreshLayout.setRefreshing(false);
+                try {
+                    String body = baseResp.string();
+                    if (!TextUtils.isEmpty(body)) {
+                        List<YejiTotal> childList = GsonUtils.fromJson(body, new TypeToken<List<YejiTotal>>() {
+                        }.getType());
+                        datas.clear();
+                        datas.addAll(childList);
+                        setData(datas);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFail(String code, String message) {
+                swipeRefreshLayout.setRefreshing(false);
+                ToastUtils.showLong(message);
+            }
+        });
+    }
+
+    private void setLevelNodes(TreeNode<YejiTotal> parentLevel, List<YejiTotal> yejiTotals) {
+        if (yejiTotals != null) {
+            for (YejiTotal yejiTotal : yejiTotals) {
+                TreeNode<YejiTotal> childLevel = new TreeNode(yejiTotal);
+                parentLevel.addChild(childLevel);
+                if (yejiTotal.getSub() != null && !yejiTotal.getSub().isEmpty()) {
+                    setLevelNodes(childLevel, yejiTotal.getSub());
+                }
+            }
+        }
+
+    }
+
+    private void setData(List<YejiTotal> childList) {
+        nodes.clear();
+
+        for (YejiTotal yejiTotal : childList) {
+            TreeNode<YejiTotal> firstLevel = new TreeNode(yejiTotal);
+            nodes.add(firstLevel);
+            setLevelNodes(firstLevel, yejiTotal.getSub());
+        }
     }
 }
